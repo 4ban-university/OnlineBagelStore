@@ -1,7 +1,6 @@
 language: php
 php:
   - 7.0
-  # aliased to a recent hhvm version
+  - 7.1
   - hhvm
-  
- script:	phpunit
+script: phpunit
