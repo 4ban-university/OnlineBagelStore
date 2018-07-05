@@ -5,3 +5,6 @@ before_script:
     - composer install
     
 script: phpunit
+
+notifications:
+    slack: soen6011z:oW72jZF8cuM2HErfyDyDcwoy
