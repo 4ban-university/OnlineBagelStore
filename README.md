@@ -3,6 +3,8 @@
 [![Deploy: heroku](https://img.shields.io/badge/deploy-heroku-blue.svg)](https://soen6011.herokuapp.com/)
 # soen6011
 
+## Slack 
+[soen6011z.slack.com](soen6011z.slack.com)
 ## Postgres database access
 |||
 |---|-------------------|
