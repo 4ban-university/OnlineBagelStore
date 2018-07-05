@@ -4,7 +4,7 @@
 # soen6011
 
 ## Slack 
-[soen6011z.slack.com](soen6011z.slack.com)
+[soen6011z.slack.com](https://soen6011z.slack.com)
 ## Postgres database access
 |||
 |---|-------------------|
