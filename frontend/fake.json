@@ -1,0 +1,34 @@
+{
+    "bagels": [
+        {"id": 1, "title": "Bagel 1", "calories": 125, "description": "Super delicious bagel 1", "image":"https://picsum.photos/600/300/?image=13" },
+        {"id": 2, "title": "Bagel 2", "calories": 145, "description": "Super delicious bagel 2", "image":"https://picsum.photos/600/300/?image=24" },
+        {"id": 3, "title": "Bagel 3", "calories": 163, "description": "Super delicious bagel 3", "image":"https://picsum.photos/600/300/?image=35" },
+        {"id": 4, "title": "Bagel 4", "calories": 134, "description": "Super delicious bagel 4", "image":"https://picsum.photos/600/300/?image=25" },
+        {"id": 5, "title": "Bagel 5", "calories": 342, "description": "Super delicious bagel 5", "image":"https://picsum.photos/600/300/?image=54" },
+        {"id": 6, "title": "Bagel 6", "calories": 654, "description": "Super delicious bagel 6", "image":"https://picsum.photos/600/300/?image=61" },
+        {"id": 7, "title": "Bagel 7", "calories": 654, "description": "Super delicious bagel 7", "image":"https://picsum.photos/600/300/?image=62" },
+        {"id": 8, "title": "Bagel 8", "calories": 644, "description": "Super delicious bagel 8", "image":"https://picsum.photos/600/300/?image=63" },
+        {"id": 9, "title": "Bagel 9", "calories": 674, "description": "Super delicious bagel 9", "image":"https://picsum.photos/600/300/?image=64" },
+        {"id": 10, "title": "Bagel 10", "calories": 654, "description": "Super delicious bagel 10", "image":"https://picsum.photos/600/300/?image=65" },
+        {"id": 11, "title": "Bagel 11", "calories": 154, "description": "Super delicious bagel 11", "image":"https://picsum.photos/600/300/?image=66" },
+        {"id": 12, "title": "Bagel 12", "calories": 164, "description": "Super delicious bagel 12", "image":"https://picsum.photos/600/300/?image=67" },
+        {"id": 13, "title": "Bagel 13", "calories": 254, "description": "Super delicious bagel 13", "image":"https://picsum.photos/600/300/?image=68" },
+        {"id": 14, "title": "Bagel 14", "calories": 344, "description": "Super delicious bagel 14", "image":"https://picsum.photos/600/300/?image=69" },
+        {"id": 15, "title": "Bagel 15", "calories": 124, "description": "Super delicious bagel 15", "image":"https://picsum.photos/600/300/?image=20" },
+        {"id": 16, "title": "Bagel 16", "calories": 384, "description": "Super delicious bagel 16", "image":"https://picsum.photos/600/300/?image=43" },
+        {"id": 17, "title": "Bagel 17", "calories": 244, "description": "Super delicious bagel 17", "image":"https://picsum.photos/600/300/?image=44" },
+        {"id": 18, "title": "Bagel 18", "calories": 174, "description": "Super delicious bagel 18", "image":"https://picsum.photos/600/300/?image=45" },
+        {"id": 19, "title": "Bagel 19", "calories": 244, "description": "Super delicious bagel 19", "image":"https://picsum.photos/600/300/?image=78" },
+        {"id": 20, "title": "Bagel 20", "calories": 314, "description": "Super delicious bagel 20", "image":"https://picsum.photos/600/300/?image=21" }
+    ],
+    "toppings": [
+        {"id": 1, "title": "Topping 1", "calories": 25, "description": "Super delicious topping 1", "allergyfree": true },
+        {"id": 2, "title": "Topping 2", "calories": 45, "description": "Super delicious topping 2", "allergyfree": false },
+        {"id": 3, "title": "Topping 3", "calories": 63, "description": "Super delicious topping 3", "allergyfree": true },
+        {"id": 4, "title": "Topping 4", "calories": 34, "description": "Super delicious topping 4", "allergyfree": false },
+        {"id": 5, "title": "Topping 5", "calories": 42, "description": "Super delicious topping 5", "allergyfree": true },
+        {"id": 6, "title": "Topping 6", "calories": 54, "description": "Super delicious topping 6", "allergyfree": false },
+        {"id": 7, "title": "Topping 5", "calories": 42, "description": "Super delicious topping 7", "allergyfree": true },
+        {"id": 8, "title": "Topping 6", "calories": 54, "description": "Super delicious topping 8", "allergyfree": false }
+    ]
+}
