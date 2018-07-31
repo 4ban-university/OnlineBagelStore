@@ -1,10 +1,4 @@
 language: php
-php:
-  - 7.2
-before_script:
-    - composer install
-    
-script: phpunit
-
-notifications:
-    slack: soen6011z:oW72jZF8cuM2HErfyDyDcwoy
+branches:
+    only:
+        - master
