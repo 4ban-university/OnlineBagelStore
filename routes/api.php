@@ -16,3 +16,19 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+// List Bagels
+Route::get('bagels', 'BagelsController@index');
+
+// List Bagel
+Route::get('bagel/{id}', 'BagelsController@show');
+
+// Create Bagel
+Route::post('bagel', 'BagelsController@store');
+
+// Edit Bagel
+Route::put('bagel/{id}', 'BagelsController@update');
+
+// Delete Bagel
+Route::delete('bagel/{id}', 'BagelsController@destroy');
