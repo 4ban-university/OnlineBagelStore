@@ -9,7 +9,7 @@
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit",
     "production": "cd frontend/dist && google-chrome-stable http://localhost:8000 && python2 -m SimpleHTTPServer 8000",
-    "fake": "json-server --watch fake.json"
+    "fake": "json-server --watch fake.json --routes fake.routes.json"
   },
   "dependencies": {
     "axios": "^0.18.0",

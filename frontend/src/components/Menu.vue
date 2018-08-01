@@ -8,16 +8,16 @@
     </div>
     <div class="col-md-3" v-else v-for="bagel of bagels" v-bind:key="bagel.id">
       <b-card :title=bagel.title
+              :sub-title=bagel.description
               :img-src=bagel.image
               img-alt="Image"
               img-top
-              class="mb-1 mt-3"
-              :footer="'Calories:'+bagel.calories"
-              footer-tag="footer"
-              footer-bg-variant="info"
-              footer-border-variant="dark">
-        <p class="card-text">{{bagel.description}}</p>
-        <b-btn v-b-modal.modal-center v-on:click="item = bagel">Add</b-btn>
+              class="mb-1 mt-1"
+              border-variant="secondary">
+        <div slot="footer">
+          <small class="text-muted" align="right">Calories: {{bagel.calories}}</small>
+          <b-btn size="sm" style="float: right" variant="warning" v-b-modal.modal-center v-on:click="item = bagel">Add</b-btn>
+        </div>
       </b-card>
     </div>
     <Modal :item="item"/>

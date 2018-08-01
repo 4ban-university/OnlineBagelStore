@@ -1,41 +1,31 @@
 <template>
-  <b-modal id="modal-center" size="lg" centered title="Add to cart">
-        <!-- <b-alert  v-if="errored" class="mx-auto" style="width: 100%;" show variant="danger" v-for="error of errors" v-bind:key="error">{{error.message}}</b-alert> -->
-        <img :src="item.image"/>
-        <p class="my-4">{{item.title}}</p>
-        <p class="my-4">{{item.description}}</p>
-        <p class="my-4">Calories: {{item.calories}}</p>
-        <hr>
-        <ul v-for="topping of toppings" v-bind:key="topping">
-          <li>{{topping.title}} {{topping.description}} {{topping.calories}} {{topping.allergyfree}}</li>
-        </ul>
+  <b-modal id="modal-center" 
+           size="lg" 
+           title="Add to cart"
+           header-bg-variant="warning">
+        <b-img alt="img" center :src="item.image"/>
+        <b-list-group class="mt-1">
+          <b-list-group-item active>{{item.title}}</b-list-group-item>
+          <b-list-group-item>{{item.description}}</b-list-group-item>
+          <b-list-group-item>Calories: {{item.calories}}</b-list-group-item>
+        </b-list-group>
+        <Order/>
   </b-modal>
 </template>
 
 <script>
-import axios from 'axios'
+import Order from '@/components/Order.vue'
 
 export default {
   name: 'Modal',
+  components: {
+    Order
+  },
   props: {
-    item: String
+    item: {}
   },
   data () {
-    return {
-      toppings: [],
-      errors: [],
-      errored: false
-    }
-  },
-  created () {
-    axios.get(`http://localhost:3000/toppings`)
-      .then(response => {
-        this.toppings = response.data
-      })
-      .catch(e => {
-        this.errors.push(e)
-        this.errored = true
-      })
+    return {}
   }
 }
 </script>
