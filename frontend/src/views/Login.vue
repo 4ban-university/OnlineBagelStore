@@ -1,6 +1,7 @@
 <template>
 <body id="LoginForm">
-  <div class="container">
+  <div class="container-fluid">
+    <Navbar/>
     <div class="login-form">
       <div class="main-div">
         <div class="panel">
@@ -24,18 +25,27 @@
   </div>
 </body>
 </template>
-<script>
-    import router from '../router'
 
-    export default {
-        name: 'Login',
-        methods: {
-            navigate() {
-                router.push({ name: "main" });
-            }
-        }
-    }
+<script>
+import Navbar from '@/components/Navbar.vue'
+
+export default {
+  components: {
+    Navbar
+  }
+}
+// import router from '../router'
+
+// export default {
+//   name: 'Login',
+//   methods: {
+//     navigate() {
+//       router.push({ name: "main" });
+//     }
+//   }
+// }
 </script>
+
 <style>
 body#LoginForm{
   background-image:url("https://runningmagazine.ca/wp-content/uploads/2016/01/bagels.jpg");
