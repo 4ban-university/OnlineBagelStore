@@ -40,7 +40,7 @@ export default {
     }
   },
   created () {
-    axios.get(`http://localhost:3000/toppings`)
+    axios.get(`http://localhost:3000/api/toppings`)
       .then(response => {
         this.toppings = response.data
       })
@@ -51,7 +51,7 @@ export default {
   },
   methods:{
     orderPush () {
-      axios.post(`http://localhost:3000/orders`, {body: this.orderBody})
+      axios.post(`http://localhost:3000/api/orders`, {body: this.orderBody})
         .then(response => {})
         .catch(e => {
           this.errors.push(e)

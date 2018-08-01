@@ -42,7 +42,7 @@ export default {
     }
   },
   created () {
-    axios.get(`http://localhost:3000/bagels`)
+    axios.get(`http://localhost:3000/api/bagels`)
       .then(response => {
         this.bagels = response.data
       })
