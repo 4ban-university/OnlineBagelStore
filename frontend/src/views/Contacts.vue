@@ -1,6 +1,18 @@
 <template>
-  <main role="main" class="container">
+  <b-container fluid>
+    <Navbar/>
     <h1 class="mt-5">Contact us</h1>
     <p class="lead">Based in Montreal, Quebec, Canada.</p>
-  </main>
+  </b-container>
 </template>
+
+<script>
+// @ is an alias to /src
+import Navbar from '@/components/Navbar.vue'
+
+export default {
+  components: {
+    Navbar
+  }
+}
+</script>
