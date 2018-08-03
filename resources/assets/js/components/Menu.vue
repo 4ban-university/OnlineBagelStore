@@ -26,7 +26,7 @@
 
 <script>
 import axios from 'axios'
-import Modal from '@/components/Modal.vue'
+import Modal from './Modal.vue'
 
 export default {
   name: 'Menu',
@@ -38,16 +38,17 @@ export default {
       bagels: [],
       errors: [],
       errored: false,
-      item: String
+      item: String,
+      loading: ''
     }
   },
   created () {
-    axios.get(`http://localhost:3000/api/bagels`)
+    axios.get(`/api/bagels`)
       .then(response => {
-        this.bagels = response.data
+        this.bagels = response.data.data;
       })
       .catch(e => {
-        this.errors.push(e)
+        this.errors.push(e);
         this.errored = true
       })
   }
