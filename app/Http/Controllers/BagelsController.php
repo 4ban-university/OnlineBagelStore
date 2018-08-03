@@ -17,10 +17,10 @@ class BagelsController extends Controller
     public function index()
     {
         // Get Bagels
-        $bagles = Bagel::paginate(15);
+        $bagels = Bagel::paginate(15);
 
         // Return Collection
-        return BagelResource::collection($bagles);
+        return BagelResource::collection($bagels);
     }
 
     /**
