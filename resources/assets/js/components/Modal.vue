@@ -1,6 +1,6 @@
 <template>
-  <b-modal id="modal-center" 
-           size="lg" 
+  <b-modal id="modal-center"
+           size="lg"
            title="Add to cart"
            header-bg-variant="warning">
         <b-img alt="img" center :src="item.image"/>
@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import Order from '@/components/Order.vue'
+import Order from './Order.vue'
 
 export default {
   name: 'Modal',

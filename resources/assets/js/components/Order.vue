@@ -34,29 +34,29 @@ export default {
   data () {
     return {
       toppings: [],
-      orderBody:{},
+      orderBody: {},
       errors: [],
-      errored: false,
+      errored: false
     }
   },
   created () {
-    axios.get(`http://localhost:3000/api/toppings`)
+    axios.get(`/api/toppings`)
       .then(response => {
-        this.toppings = response.data
+        this.toppings = response.data.data
       })
       .catch(e => {
         this.errors.push(e)
         this.errored = true
       })
   },
-  methods:{
+  methods: {
     orderPush () {
-      axios.post(`http://localhost:3000/api/orders`, {body: this.orderBody})
+      axios.post(`/api/orders`, {body: this.orderBody})
         .then(response => {})
         .catch(e => {
           this.errors.push(e)
           this.errored = true
-      })
+        })
     }
   }
 }
