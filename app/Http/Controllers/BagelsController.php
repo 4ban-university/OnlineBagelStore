@@ -16,7 +16,7 @@ class BagelsController extends Controller
      */
     public function index()
     {
-        $bagels = Bagel::paginate(15);
+        $bagels = Bagel::all();
         return BagelResource::collection($bagels);
     }
 
@@ -42,6 +42,7 @@ class BagelsController extends Controller
         $bagel->title = $request->input('title');
         $bagel->calories = $request->input('calories');
         $bagel->description = $request->input('description');
+        $bagel->price = $request->input('price');
         $bagel->image = $request->input('image');
 
         if($bagel->save()) {
@@ -74,6 +75,7 @@ class BagelsController extends Controller
         $bagel->title = $request->input('title');
         $bagel->calories = $request->input('calories');
         $bagel->description = $request->input('description');
+        $bagel->price = $request->input('price');
         $bagel->image = $request->input('image');
 
         if($bagel->save()) {

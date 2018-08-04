@@ -7,6 +7,7 @@ $factory->define(App\Bagel::class, function (Faker $faker) {
         'title' => $faker->text(10),
         'calories' => $faker-> numberBetween(100, 300),
         'description'=> $faker->text(30),
+        'price'=> $faker->randomFloat(2,5, 10),
         'image'=>'https://picsum.photos/600/300/?image='.$faker->numberBetween(1, 100)
     ];
 });

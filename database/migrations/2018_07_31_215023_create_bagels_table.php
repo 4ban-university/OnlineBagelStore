@@ -18,6 +18,7 @@ class CreateBagelsTable extends Migration
             $table->string('title');
             $table->integer('calories');
             $table->text('description');
+            $table->float('price');
             $table->string('image');
             $table->timestamps();
         });
