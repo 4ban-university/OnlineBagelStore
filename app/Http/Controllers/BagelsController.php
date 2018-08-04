@@ -16,10 +16,7 @@ class BagelsController extends Controller
      */
     public function index()
     {
-        // Get Bagels
         $bagels = Bagel::paginate(15);
-
-        // Return Collection
         return BagelResource::collection($bagels);
     }
 
@@ -41,11 +38,7 @@ class BagelsController extends Controller
      */
     public function store(Request $request)
     {
-
-        // $bagel = $request->isMethod('put') ? Bagel::findOrFail($request->id) : new Bagel;
         $bagel = new Bagel;
-
-        //$bagel->id = $request->input('id');
         $bagel->title = $request->input('title');
         $bagel->calories = $request->input('calories');
         $bagel->description = $request->input('description');
@@ -64,12 +57,8 @@ class BagelsController extends Controller
      */
     public function show($id)
     {
-        // Get Bagel
         $bagel = Bagel::findOrFail($id);
-
-        // return Bagel
         return new BagelResource($bagel);
-
     }
 
     /**
@@ -82,7 +71,6 @@ class BagelsController extends Controller
     public function update(Request $request, $id)
     {
         $bagel = Bagel::findOrFail($id);
-        // $bagel->id = $request->input('id');
         $bagel->title = $request->input('title');
         $bagel->calories = $request->input('calories');
         $bagel->description = $request->input('description');
@@ -101,9 +89,7 @@ class BagelsController extends Controller
      */
     public function destroy($id)
     {
-        // Get Bagel
         $bagel = Bagel::findOrFail($id);
-
         if($bagel->delete()) {
             return new BegelResource($bagel);
         }

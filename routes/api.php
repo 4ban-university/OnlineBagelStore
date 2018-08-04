@@ -34,6 +34,10 @@ Route::group(['middleware' => 'guest:api'], function () {
     Route::get('oauth/{driver}/callback', 'Auth\OAuthController@handleProviderCallback')->name('oauth.callback');
 });
 
+// APIs
+
+// Bagels API
+
 // List Bagels
 Route::get('bagels', 'BagelsController@index');
 
@@ -48,3 +52,20 @@ Route::put('bagel/{id}', 'BagelsController@update');
 
 // Delete Bagel
 Route::delete('bagel/{id}', 'BagelsController@destroy');
+
+// Toppings API
+
+// List Toppings
+Route::get('toppings', 'ToppingController@index');
+
+// List Topping
+Route::get('topping/{id}', 'ToppingController@show');
+
+// Create Topping
+Route::post('topping', 'ToppingController@store');
+
+// Edit Topping
+Route::put('topping/{id}', 'ToppingController@update');
+
+// Delete Topping
+Route::delete('topping/{id}', 'ToppingController@destroy');

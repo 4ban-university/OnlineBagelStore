@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class ToppingsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,7 +11,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(BagelsTableSeeder::class);
-        $this->call(ToppingsTableSeeder::class);
+        factory(App\Topping::class, 10)->create();
     }
 }
