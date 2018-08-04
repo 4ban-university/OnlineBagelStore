@@ -23,6 +23,16 @@
               {{ $t('about') }}
             </router-link>
           </li>
+
+          <li class="nav-item">
+              <router-link :to="{ name: 'cart' }" class="nav-link" active-class="active">
+                <span class="icon">
+                  <i class="fa fa-shopping-cart"></i>
+                </span>
+                <span>Checkout ({{ itemsInCart() }})</span>
+              </router-link>
+          </li>
+
           <!-- Authenticated -->
           <li v-if="user" class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-dark"
@@ -86,6 +96,10 @@ export default {
 
       // Redirect to login.
       this.$router.push({ name: 'login' })
+    },
+    itemsInCart(){
+        let cart = this.$store.getters.cartProducts;
+        return cart.reduce((accum, item) => accum + item.quantity, 0)
     }
   }
 }

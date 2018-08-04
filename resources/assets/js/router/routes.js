@@ -7,6 +7,7 @@ const NotFound = () => import('~/pages/errors/404').then(m => m.default || m)
 
 const Home = () => import('~/pages/home').then(m => m.default || m)
 const About = () => import('~/pages/about').then(m => m.default || m)
+const Cart = () => import('~/pages/cart').then(m => m.default || m)
 const Contacts = () => import('~/pages/contacts').then(m => m.default || m)
 const Settings = () => import('~/pages/settings/index').then(m => m.default || m)
 const SettingsProfile = () => import('~/pages/settings/profile').then(m => m.default || m)
@@ -39,6 +40,8 @@ export default [
       name: 'contacts',
       component: Contacts
   },
+
+  { path: '/cart', name:'cart', component: Cart },
 
   { path: '*', component: NotFound }
 ]
