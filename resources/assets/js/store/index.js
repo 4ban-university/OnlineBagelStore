@@ -36,8 +36,12 @@ const getters = {
             const product = state.all.find(p => p.id === id)
 
             return {
+                id: product.id,
                 name: product.title,
                 price: product.price,
+                calories: product.calories,
+                description: product.description,
+                image: product.image,
                 quantity
             }
         })
@@ -48,6 +52,11 @@ const getters = {
 const actions = {
     addToCart({ commit }, product){
         commit(types.ADD_TO_CART, {
+            id: product.id,
+        })
+    },
+    removeFromCart({ commit }, product){
+        commit(types.REMOVE_FROM_CART, {
             id: product.id,
         })
     },
@@ -70,6 +79,17 @@ const mutations = {
             })
         } else {
             record.quantity++
+        }
+    },
+    [types.REMOVE_FROM_CART] (state, { id }) {
+        const record = state.added.find(p => p.id === id)
+
+        if (record) {
+            record.quantity--
+        }
+
+        if (record.quantity === 0) {
+            state.added = state.added.filter(p => p.id !== id)
         }
     },
     [types.ADD_PRODUCTS] (state, { products }) {

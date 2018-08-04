@@ -8,6 +8,7 @@
         <table class="table is-striped" v-show="products.length">
             <thead>
             <tr>
+                <td>ID</td>
                 <td>Name</td>
                 <td>Price</td>
                 <td>Quantity</td>
@@ -15,9 +16,10 @@
             </thead>
             <tbody>
             <tr v-for="p in products">
+                <td>{{ p.id }}</td>
                 <td>{{ p.name }}</td>
                 <td>${{ p.price }}</td>
-                <td>{{ p.quantity }}</td>
+                <td><plusminsfield v-bind:value="p.quantity" :product="p"></plusminsfield></td>
             </tr>
             <tr>
                 <td><b>Total:</b></td>
@@ -33,11 +35,16 @@
 
 <script>
     import { mapGetters } from 'vuex'
+    import PlusMinusField from '../components/PlusMinusField.vue'
 
     export default {
+        components: {
+            'plusminsfield': PlusMinusField
+        },
         computed: {
             ...mapGetters({
-                products: 'cartProducts'
+                products: 'cartProducts',
+                authenticated: 'auth/check'
             }),
             total () {
                 return this.products.reduce((total, p) => {

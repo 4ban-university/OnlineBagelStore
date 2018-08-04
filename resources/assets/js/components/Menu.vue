@@ -7,35 +7,34 @@
       <b-alert class="mx-auto" style="width: 100%;" show variant="info">Loading ...</b-alert>
     </div>
     <div class="col-md-3" v-else v-for="bagel of bagels" v-bind:key="bagel.id">
-      <b-card :title=bagel.title
-              :sub-title=bagel.description
+      <b-card no-body
               :img-src=bagel.image
               img-alt="Image"
               img-top
               class="mb-1 mt-1"
               border-variant="secondary">
+        <b-card-body>
+          <b-link :to="{ name: 'bagel', params: { id: bagel.id }}">
+            <h4 class="card-title">{{ bagel.title }}</h4>
+            <h6 class="card-subtitle">{{ bagel.description }}</h6>
+          </b-link>
+        </b-card-body>
         <div slot="footer">
           <small class="text-muted" align="right">Calories: {{bagel.calories}}</small>
-          <b-btn size="sm" style="float: right" variant="warning" v-b-modal.modal-center v-on:click="item = bagel">Modal</b-btn>
-          <td><button @click='addToCart(bagel)' class='button is-info'>Add to cart</button></td>
+          <b-btn size="sm" style="float: right" variant="warning" @click='addToCart(bagel)'>Add</b-btn>
         </div>
       </b-card>
     </div>
-    <Modal :item="item"/>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
-import Modal from './Modal.vue'
 
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'Menu',
-  components: {
-    Modal
-  },
   computed: mapGetters({
       products: 'allProducts',
       length: 'getNumberOfProducts'
@@ -49,7 +48,6 @@ export default {
       bagels: [],
       errors: [],
       errored: false,
-      item: String,
       loading: ''
     }
   },
@@ -67,7 +65,3 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-
-</style>
