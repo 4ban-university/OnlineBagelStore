@@ -12,4 +12,14 @@ class OrderItem extends Model
     {
         return $this->hasMany('App\OrderItemTopping');
     }
+
+    public function order()
+    {
+        return $this->belongsTo('App\Order');
+    }
+
+    public function bagel()
+    {
+        return $this->belongsTo('App\Bagel');
+    }
 }

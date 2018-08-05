@@ -48,18 +48,16 @@ class OrderController extends Controller
         $order->payment_option      = $request->input('payment_option');
         $order->save();
 
-        $counter = 0;
         foreach ($request->input('items') as $item_input){
             $item = new OrderItem($item_input);
             $item->order_id = $order->id;
             $item->save();
 
-            foreach ($request->input('items.'.$counter.'.toppings') as $topping_input) {
+            foreach ($item_input['toppings'] as $topping_input) {
                 $topping = new OrderItemTopping($topping_input);
                 $topping->order_item_id = $item->id;
                 $topping->save();
             }
-            $counter ++;
         }
         return new OrderResource($order);
     }
