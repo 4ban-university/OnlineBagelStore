@@ -13,5 +13,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(BagelsTableSeeder::class);
         $this->call(ToppingsTableSeeder::class);
+        $this->call(OrdersTableSeeder::class);
+        $this->call(OrderItemsTableSeeder::class);
+        $this->call(OrderItemToppinsTableSeeder::class);
     }
 }
