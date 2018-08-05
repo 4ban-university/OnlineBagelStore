@@ -93,7 +93,7 @@ class BagelsController extends Controller
     {
         $bagel = Bagel::findOrFail($id);
         if($bagel->delete()) {
-            return new BegelResource($bagel);
+            return new BagelResource($bagel);
         }
     }
 }

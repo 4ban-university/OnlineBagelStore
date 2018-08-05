@@ -69,3 +69,21 @@ Route::put('topping/{id}', 'ToppingController@update');
 
 // Delete Topping
 Route::delete('topping/{id}', 'ToppingController@destroy');
+
+
+// Orders API
+
+// List Orders
+Route::get('orders', 'OrderController@index');
+
+// List Order
+Route::get('order/{id}', 'OrderController@show');
+
+// Create Order
+Route::post('order', 'OrderController@store');
+
+// Edit Order
+Route::put('order/{id}', 'OrderController@update');
+
+// Delete Order
+Route::delete('order/{id}', 'OrderController@destroy');
