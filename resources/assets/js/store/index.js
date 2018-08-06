@@ -54,7 +54,11 @@ const getters = {
         return getCartProducts(state)
     },
     price: state => state.price,
-    coupon: state => state.coupon
+    coupon: state => state.coupon,
+    toppings: (state) => (id) => {
+        const product = state.added.find(p => p.id === id)
+        return product.toppings
+    }
 }
 
 // actions
@@ -70,6 +74,18 @@ const actions = {
             id: product.id,
         })
         commit(types.UPDATE_PRICE)
+    },
+    addTopping({ commit }, [product_id, topping]){
+        commit(types.ADD_TOPPING, {
+            id: product_id,
+            topping: topping,
+        })
+    },
+    removeTopping({ commit }, [product_id, topping]){
+        commit(types.REMOVE_TOPPING, {
+            id: product_id,
+            topping: topping,
+        })
     },
     updateProducts({ commit }, products){
         commit(types.ADD_PRODUCTS, {
@@ -96,7 +112,8 @@ const mutations = {
         if (!record) {
             state.added.push({
                 id,
-                quantity: 1
+                quantity: 1,
+                toppings: []
             })
         } else {
             record.quantity++
@@ -126,6 +143,14 @@ const mutations = {
             }
             state.all.push(product)
         }
+    },
+    [types.ADD_TOPPING] (state, { id, topping }) {
+        const product = state.added.find(p => p.id === id)
+        product.toppings.push(topping)
+    },
+    [types.REMOVE_TOPPING] (state, { id, topping }) {
+        const product = state.added.find(p => p.id === id)
+        product.toppings = product.toppings.filter(t => t.code !== topping.code)
     },
     [types.ADD_REDUCTION] (state, { reduction, coupon }) {
         state.reduction = reduction
