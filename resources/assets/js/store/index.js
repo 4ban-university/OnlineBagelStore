@@ -24,7 +24,26 @@ const debug = process.env.NODE_ENV !== 'production'
 // initial state
 const state = {
     added: [],
-    all: []
+    all: [],
+    price: 0,
+    reduction: 0,
+    coupon: ''
+}
+
+function getCartProducts(state) {
+    return state.added.map(({ id, quantity }) => {
+        const product = state.all.find(p => p.id === id)
+
+        return {
+            id: product.id,
+            name: product.title,
+            price: product.price,
+            calories: product.calories,
+            description: product.description,
+            image: product.image,
+            quantity
+        }
+    })
 }
 
 // getters
@@ -32,20 +51,10 @@ const getters = {
     allProducts: state => state.all,
     getNumberOfProducts: state => (state.all) ? state.all.length : 0,
     cartProducts: state => {
-        return state.added.map(({ id, quantity }) => {
-            const product = state.all.find(p => p.id === id)
-
-            return {
-                id: product.id,
-                name: product.title,
-                price: product.price,
-                calories: product.calories,
-                description: product.description,
-                image: product.image,
-                quantity
-            }
-        })
-    }
+        return getCartProducts(state)
+    },
+    price: state => state.price,
+    coupon: state => state.coupon
 }
 
 // actions
@@ -54,17 +63,29 @@ const actions = {
         commit(types.ADD_TO_CART, {
             id: product.id,
         })
+        commit(types.UPDATE_PRICE)
     },
     removeFromCart({ commit }, product){
         commit(types.REMOVE_FROM_CART, {
             id: product.id,
         })
+        commit(types.UPDATE_PRICE)
     },
     updateProducts({ commit }, products){
         commit(types.ADD_PRODUCTS, {
             products: products,
         })
-    }
+    },
+    updatePrice({ commit }){
+        commit(types.UPDATE_PRICE)
+    },
+    applyReduction({ commit }, [reduction, coupon]){
+        commit(types.ADD_REDUCTION, {
+            reduction: reduction,
+            coupon: coupon,
+        })
+        commit(types.UPDATE_PRICE)
+    },
 }
 
 // mutations
@@ -105,6 +126,17 @@ const mutations = {
             }
             state.all.push(product)
         }
+    },
+    [types.ADD_REDUCTION] (state, { reduction, coupon }) {
+        state.reduction = reduction
+        state.coupon = coupon
+    },
+    [types.UPDATE_PRICE] (state) {
+        var originalPrice = getCartProducts(state).reduce((total, p) => {
+            return total + p.price * p.quantity
+        }, 0)
+        var num = Number(originalPrice - (state.reduction / 100) * originalPrice)
+        state.price = num.toFixed(2)
     }
 }
 

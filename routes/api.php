@@ -87,3 +87,6 @@ Route::put('order/{id}', 'OrderController@update');
 
 // Delete Order
 Route::delete('order/{id}', 'OrderController@destroy');
+
+// Check coupon existence
+Route::get('coupon/{name}', 'CouponController@isValid');
