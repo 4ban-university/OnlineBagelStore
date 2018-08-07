@@ -22,11 +22,19 @@
 
 ## Installation
 
-- `composer create-project --prefer-dist cretueusebiu/laravel-vue-spa`
+```bash
+# install php dependencies
+composer install
+
+# Additional commands
+php artisan key:generate
+php artisan jwt:secret
+
+#migrate database
+php artisan migrate
+php artisan db:seed
+```
 - Edit `.env` and set your database connection details
-- (When installed via git clone or download, run `php artisan key:generate` and `php artisan jwt:secret`)
-- `php artisan migrate`
-- `yarn` / `npm install`
 
 ## Usage
 
