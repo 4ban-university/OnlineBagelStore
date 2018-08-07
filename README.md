@@ -22,6 +22,7 @@
 
 ## Installation
 
+PHP part
 ```bash
 # install php dependencies
 composer install
@@ -34,7 +35,17 @@ php artisan jwt:secret
 php artisan migrate
 php artisan db:seed
 ```
-- Edit `.env` and set your database connection details
+JavaScript part
+```bash
+# install javascript dependencies
+npm install
+
+# build application
+npm run dev
+
+# start dev server on 8888 port
+php artisan serve --port="8888"
+```
 
 ## Usage
 
