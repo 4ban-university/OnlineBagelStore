@@ -56,12 +56,14 @@ npm install
 
 # build application
 npm run dev
-
+```
+## Usage
+```bash
 # start dev server on 8888 port
 php artisan serve --port="8888"
 ```
 
-## Usage
+## Usage - For a manually configured apache server
 
 #### Development
 
