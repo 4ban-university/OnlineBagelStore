@@ -21,14 +21,49 @@
 - Bootstrap 4 + Font Awesome 5
 
 ## Installation
+Configure MySQL following tutorial.
 
-- `composer create-project --prefer-dist cretueusebiu/laravel-vue-spa`
-- Edit `.env` and set your database connection details
-- (When installed via git clone or download, run `php artisan key:generate` and `php artisan jwt:secret`)
-- `php artisan migrate`
-- `yarn` / `npm install`
+Settings
+```bash
+# Create .env file
+cp .env.example .env
+```
+Change in the `.env` file fields:
 
+`DB_DATABASE=dbname`
+
+`DB_USERNAME=dbuser`
+
+`DB_PASSWORD=userpassword`
+
+PHP part
+```bash
+# install php dependencies
+composer install
+
+# Additional commands
+php artisan key:generate
+php artisan jwt:secret
+
+#migrate database
+php artisan migrate
+php artisan db:seed
+```
+JavaScript part
+```bash
+# install javascript dependencies
+npm install
+
+# build application
+npm run dev
+```
 ## Usage
+```bash
+# start dev server on 8888 port
+php artisan serve --port="8888"
+```
+
+## Usage - For a manually configured apache server
 
 #### Development
 
