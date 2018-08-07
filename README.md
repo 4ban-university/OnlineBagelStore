@@ -21,6 +21,20 @@
 - Bootstrap 4 + Font Awesome 5
 
 ## Installation
+Configure MySQL following tutorial.
+
+Settings
+```bash
+# Create .env file
+cp .env.example .env
+```
+Change in the `.env` file fields:
+
+`DB_DATABASE=dbname`
+
+`DB_USERNAME=dbuser`
+
+`DB_PASSWORD=userpassword`
 
 PHP part
 ```bash
