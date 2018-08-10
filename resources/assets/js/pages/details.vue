@@ -3,7 +3,7 @@
     <h1 class="title">{{ $t('your_cart') }}</h1>
     <p v-show="!products.length">
       <i>{{ $t('empty_cart') }}</i>
-      <router-link to="/"></router-link>
+      <router-link to="/">{{ $t('go_shopping') }}</router-link>
     </p>
     <card :title="$t('details')" v-show="products.length">
       <form @submit.prevent="">
@@ -27,7 +27,7 @@
         <div class="form-group row">
           <label class="col-md-3 col-form-label text-md-right">{{ $t('email') }}</label>
           <div class="col-md-7">
-            <input v-model="form.email" v-validate="'required|email'" name="email" type="text" class="form-control">
+            <input v-model="form.email" v-validate.initial="'required|email'" name="email" type="text" class="form-control">
             <span>{{ errors.first('email') }}</span>
           </div>
         </div>
@@ -86,7 +86,7 @@
         <!-- Submit Button -->
         <div class="form-group row">
           <div class="col-md-9 ml-md-auto">
-            <button :loading="form.busy" v-on:click="sendOrder" type="success">{{ $t('submit') }}</button>
+            <v-button v-on:click="sendOrder" type="success">{{ $t('submit') }}</v-button>
           </div>
         </div>
       </form>

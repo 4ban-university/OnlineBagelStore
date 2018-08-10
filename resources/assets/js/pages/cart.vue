@@ -53,7 +53,7 @@
 
         </table>
         <p>
-            <router-link v-show="products.length" :to="{ name: 'details' }" tag="button">{{ $t('order_info') }}</router-link>
+            <router-link v-show="products.length" :to="{ name: 'details' }" tag="button" class="btn btn-success">{{ $t('order_info') }}</router-link>
         </p>
     </div>
 </template>
