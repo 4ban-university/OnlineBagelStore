@@ -5,10 +5,10 @@ const PasswordEmail = () => import('~/pages/auth/password/email').then(m => m.de
 const PasswordReset = () => import('~/pages/auth/password/reset').then(m => m.default || m)
 const NotFound = () => import('~/pages/errors/404').then(m => m.default || m)
 
-const Home = () => import('~/pages/home').then(m => m.default || m)
 const About = () => import('~/pages/about').then(m => m.default || m)
 const Bagel = () => import('~/pages/bagel').then(m => m.default || m)
 const Cart = () => import('~/pages/cart').then(m => m.default || m)
+const Details = () => import('~/pages/details').then(m => m.default || m)
 const Contacts = () => import('~/pages/contacts').then(m => m.default || m)
 const Settings = () => import('~/pages/settings/index').then(m => m.default || m)
 const SettingsProfile = () => import('~/pages/settings/profile').then(m => m.default || m)
@@ -22,7 +22,6 @@ export default [
   { path: '/password/reset', name: 'password.request', component: PasswordEmail },
   { path: '/password/reset/:token', name: 'password.reset', component: PasswordReset },
 
-  { path: '/home', name: 'home', component: Home },
   { path: '/settings',
     component: Settings,
     children: [
@@ -43,6 +42,7 @@ export default [
   },
 
   { path: '/cart', name:'cart', component: Cart },
+  { path: '/details', name:'details', component: Details },
   { path: '/bagel/:id', name:'bagel', component: Bagel },
 
   { path: '*', component: NotFound }

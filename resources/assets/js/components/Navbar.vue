@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-white">
     <div class="container">
-      <router-link :to="{ name: user ? 'home' : 'welcome' }" class="navbar-brand">
+      <router-link :to="{ name: 'welcome' }" class="navbar-brand">
         {{ appName }}
       </router-link>
 
@@ -12,9 +12,6 @@
       <div id="navbarToggler" class="collapse navbar-collapse">
         <ul class="navbar-nav">
           <locale-dropdown/>
-          <!-- <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li> -->
         </ul>
 
         <ul class="navbar-nav ml-auto">
@@ -29,7 +26,7 @@
                 <span class="icon">
                   <i class="fa fa-shopping-cart"></i>
                 </span>
-                <span>Checkout ({{ itemsInCart() }})</span>
+                <span>{{ $t('checkout') }} ({{ itemsInCart() }})</span>
               </router-link>
           </li>
 

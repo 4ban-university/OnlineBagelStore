@@ -1,16 +1,16 @@
 <template>
     <div class="cart">
-        <h1 class="title">Your Cart</h1>
+        <h1 class="title">{{ $t('your_cart') }}</h1>
         <p v-show="!products.length">
-            <i>Your cart is empty!</i>
-            <router-link to="/">Go shopping</router-link>
+            <i>{{ $t('empty_cart') }}</i>
+            <router-link to="/">{{ $t('go_shopping') }}</router-link>
         </p>
         <table class="table is-striped" v-show="products.length">
             <thead>
                 <tr>
-                    <td>Name</td>
-                    <td>Price</td>
-                    <td>Quantity</td>
+                    <td>{{ $t('name') }}</td>
+                    <td>{{ $t('price') }}</td>
+                    <td>{{ $t('quantity') }}</td>
                 </tr>
             </thead>
             <tbody>
@@ -21,10 +21,10 @@
                         <td><plusminsfield v-bind:value="p.quantity" :product="p"></plusminsfield></td>
                     </tr>
                     <tr>
-                        <td><b>Toppings:</b></td>
+                        <td></td>
                         <td>
                             <multiselect :value="currentToppings.find(element => element.product_id === p.id).toppings"
-                                         placeholder="Select one topping or more"
+                                         :placeholder="$t('select_topping')"
                                          label="name" track-by="code" :options="toppingsAvailable" :multiple="true" :id="p.id"
                                          @select="selectTag" @remove="removeTag"></multiselect>
                         </td>
@@ -32,8 +32,8 @@
                     </tr>
                 </template>
                 <tr>
-                    <td><b>Coupon:</b></td>
-                    <td>If you have a coupon, please enter its code here</td>
+                    <td><b>{{ $t('coupon') }}:</b></td>
+                    <td>{{ $t('coupon_info') }}</td>
                     <td>
                         <form @submit.prevent="update" @keydown="form.onKeydown($event)">
                             <input v-model="form.coupon" class="form-control" type="text" name="coupon">
@@ -45,14 +45,16 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><b>Total:</b></td>
+                    <td><b>{{ $t('total') }}:</b></td>
                     <td></td>
                     <td><b>${{ this.price }}</b></td>
                 </tr>
             </tbody>
 
         </table>
-        <p><button v-show="products.length" class='button is-primary' @click='checkout'>Checkout</button></p>
+        <p>
+            <router-link v-show="products.length" :to="{ name: 'details' }" tag="button">{{ $t('order_info') }}</router-link>
+        </p>
     </div>
 </template>
 
@@ -119,12 +121,12 @@
                         }
                         else {
                             // Valid
-                            this.errors.push('Reduction of '+response.data+'% applied');
+                            this.errors.push(this.$t('coupon_applied_1') + response.data + this.$t('coupon_applied_2'));
                         }
                         this.applyReduction([response.data, coupon])
                     })
-                    .catch(e => {
-                        this.errors.push('Network error');
+                    .catch(() => {
+                        this.errors.push(this.$t('network_error'));
                     })
             },
             updateCurrentToppings() {

@@ -3,7 +3,7 @@
         <div class="text-center">
             <div class="title mb-4">
                 {{ title }}
-                <h1 class="mt-5">Contact us</h1>
+                <h1 class="mt-5">{{ $t('contact_us') }}</h1>
             </div>
         </div>
     </div>

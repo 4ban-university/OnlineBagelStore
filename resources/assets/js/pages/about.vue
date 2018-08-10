@@ -3,8 +3,8 @@
     <div class="text-center">
       <div class="title mb-4">
         {{ title }}
-        <h1 class="mt-5">About us</h1>
-        <p class="lead">We are selling bagels since 2018.</p>
+        <h1 class="mt-5">{{ $t('about_us') }}</h1>
+        <p class="lead">{{ $t('about_info') }}</p>
         <p>For more information please <router-link to="/contacts">contact</router-link> us.</p>
       </div>
     </div>
