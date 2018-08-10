@@ -72,7 +72,7 @@ export default {
 
 <style lang="css" scoped>
   .card-img-top {
-    height: 200px;
+    height: 180px;
   }
   .card-body {
     height: 100px;
