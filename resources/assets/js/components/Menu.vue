@@ -30,7 +30,6 @@
 
 <script>
 import axios from 'axios'
-import Toasted from 'vue-toasted'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
