@@ -12,6 +12,12 @@ import BootstrapVue from 'bootstrap-vue';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 
+import Toasted from 'vue-toasted';
+
+Vue.use(Toasted, {
+  duration: 3000
+});
+
 Vue.use(BootstrapVue);
 
 Vue.config.productionTip = false
