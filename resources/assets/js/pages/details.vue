@@ -6,15 +6,12 @@
       <router-link to="/"></router-link>
     </p>
     <card :title="$t('details')" v-show="products.length">
-      <form @submit.prevent="" @keydown="form.onKeydown($event)">
-        <alert-success :form="form" :message="$t('info_updated')"/>
-
+      <form @submit.prevent="">
         <!-- Name -->
         <div class="form-group row">
           <label class="col-md-3 col-form-label text-md-right">{{ $t('name') }}</label>
           <div class="col-md-7">
-            <input v-model="form.name" :class="{ 'is-invalid': form.errors.has('name') }" class="form-control" type="text" name="name">
-            <has-error :form="form" field="name"/>
+            <input v-model="form.name" class="form-control" type="text" name="name">
           </div>
         </div>
 
@@ -22,8 +19,7 @@
         <div class="form-group row">
           <label class="col-md-3 col-form-label text-md-right">{{ $t('lastname') }}</label>
           <div class="col-md-7">
-            <input v-model="form.lastname" :class="{ 'is-invalid': form.errors.has('lastname') }" class="form-control" type="text" name="lastname">
-            <has-error :form="form" field="lastname"/>
+            <input v-model="form.lastname" class="form-control" type="text" name="lastname">
           </div>
         </div>
 
@@ -31,8 +27,8 @@
         <div class="form-group row">
           <label class="col-md-3 col-form-label text-md-right">{{ $t('email') }}</label>
           <div class="col-md-7">
-            <input v-model="form.email" :class="{ 'is-invalid': form.errors.has('email') }" class="form-control" type="email" name="email">
-            <has-error :form="form" field="email" />
+            <input v-model="form.email" v-validate="'required|email'" name="email" type="text" class="form-control">
+            <span>{{ errors.first('email') }}</span>
           </div>
         </div>
 
@@ -40,8 +36,7 @@
         <div class="form-group row">
           <label class="col-md-3 col-form-label text-md-right">{{ $t('phone') }}</label>
           <div class="col-md-7">
-            <input v-model="form.phone" :class="{ 'is-invalid': form.errors.has('phone') }" class="form-control" type="text" name="phone">
-            <has-error :form="form" field="phone" />
+            <input v-model="form.phone" class="form-control" type="text" name="phone">
           </div>
         </div>
 
@@ -50,45 +45,41 @@
           <label class="col-md-3 col-form-label text-md-right">{{ $t('pickup') }}</label>
           <div class="col-md-7">
             <b-button-group size="lg">
-              <b-button v-on:click="isPickup = !isPickup" :pressed="isPickup" variant="primary">{{ $t('pickup') }}</b-button>
-              <b-button v-on:click="isPickup = !isPickup" :pressed="!isPickup" variant="primary">{{ $t('delivery') }}</b-button>
+              <b-button v-on:click="form.isPickup = !form.isPickup" :pressed="form.isPickup" variant="primary">{{ $t('pickup') }}</b-button>
+              <b-button v-on:click="form.isPickup = !form.isPickup" :pressed="!form.isPickup" variant="primary">{{ $t('delivery') }}</b-button>
             </b-button-group>
           </div>
         </div>
 
         <!-- Street name -->
-        <div class="form-group row" v-if="!isPickup">
+        <div class="form-group row" v-if="!form.isPickup">
           <label class="col-md-3 col-form-label text-md-right">{{ $t('street') }}</label>
           <div class="col-md-7">
-            <input v-model="form.street" :class="{ 'is-invalid': form.errors.has('street') }" class="form-control" type="text" name="street">
-            <has-error :form="form" field="street" />
+            <input v-model="form.street" class="form-control" type="text" name="street">
           </div>
         </div>
 
         <!-- Postal code -->
-        <div class="form-group row" v-if="!isPickup">
+        <div class="form-group row" v-if="!form.isPickup">
           <label class="col-md-3 col-form-label text-md-right">{{ $t('postal_code') }}</label>
           <div class="col-md-7">
-            <input v-model="form.postal_code" :class="{ 'is-invalid': form.errors.has('street') }" class="form-control" type="text" name="postal_code">
-            <has-error :form="form" field="postal_code" />
+            <input v-model="form.postal_code" class="form-control" type="text" name="postal_code">
           </div>
         </div>
 
         <!-- City -->
-        <div class="form-group row" v-if="!isPickup">
+        <div class="form-group row" v-if="!form.isPickup">
           <label class="col-md-3 col-form-label text-md-right">{{ $t('city') }}</label>
           <div class="col-md-7">
-            <input v-model="form.city" :class="{ 'is-invalid': form.errors.has('city') }" class="form-control" type="text" name="city">
-            <has-error :form="form" field="city" />
+            <input v-model="form.city" class="form-control" type="text" name="city">
           </div>
         </div>
 
         <!-- Province -->
-        <div class="form-group row" v-if="!isPickup">
+        <div class="form-group row" v-if="!form.isPickup">
           <label class="col-md-3 col-form-label text-md-right">{{ $t('province') }}</label>
           <div class="col-md-7">
-            <input v-model="form.province" :class="{ 'is-invalid': form.errors.has('province') }" class="form-control" type="text" name="province">
-            <has-error :form="form" field="province" />
+            <input v-model="form.province" class="form-control" type="text" name="province">
           </div>
         </div>
 
@@ -104,8 +95,7 @@
 </template>
 
 <script>
-    import Form from 'vform'
-    import { mapGetters } from 'vuex'
+    import { mapActions, mapGetters } from 'vuex'
 
     export default {
         metaInfo () {
@@ -114,31 +104,50 @@
 
         data: () => ({
             title: '',
-            form: new Form({
+            form: {
                 name: '',
+                lastname: '',
+                phone: '',
+                isPickup: '',
+                postal_code: '',
+                street: '',
+                city: '',
+                province: '',
                 email: ''
-            }),
-            isPickup: true
+            }
         }),
 
         created () {
             // Fill the form with user data.
-            this.form.keys().forEach(key => {
-                if (this.user && this.user[key]) {
-                    this.form[key] = this.user[key]
-                }
-            })
+            if (!this.infoPageAlreadyLoaded) {
+                this.infoPageLoaded()
+                Object.keys(this.form).forEach(key => {
+                    if (this.user && this.user[key]) {
+                        this.form[key] = this.user[key]
+                    }
+                })
+            } else {
+                Object.keys(this.form).forEach(key => {
+                    this.form[key] = this.details[key]
+                })
+            }
         },
 
         computed: mapGetters({
             authenticated: 'auth/check',
             user: 'auth/user',
-            products: 'cartProducts'
+            products: 'cartProducts',
+            details: 'details',
+            infoPageAlreadyLoaded: 'infoPageAlreadyLoaded'
         }),
 
         methods: {
-            async sendOrder () {
-                console.log('sendOrder')
+            ...mapActions([
+                'infoPageLoaded',
+                'saveForm'
+            ]),
+            sendOrder () {
+                this.saveForm(this.form)
             }
         }
     }

@@ -27,6 +27,18 @@ const state = {
     all: [],
     price: 0,
     reduction: 0,
+    infoPageAlreadyLoaded: false,
+    details: {
+        name: '',
+        lastname: '',
+        email: '',
+        phone: '',
+        isPickup: true,
+        street: '',
+        postal_code: '',
+        city: '',
+        province: ''
+    },
     coupon: ''
 }
 
@@ -55,6 +67,8 @@ const getters = {
     },
     price: state => state.price,
     coupon: state => state.coupon,
+    details: state => state.details,
+    infoPageAlreadyLoaded: state => state.infoPageAlreadyLoaded,
     toppings: (state) => (id) => {
         const product = state.added.find(p => p.id === id)
         return product.toppings
@@ -102,6 +116,14 @@ const actions = {
         })
         commit(types.UPDATE_PRICE)
     },
+    infoPageLoaded({ commit }){
+        commit(types.INFO_PAGE_LOADED)
+    },
+    saveForm({ commit }, form){
+        commit(types.SAVE_FORM, {
+            form: form
+        })
+    }
 }
 
 // mutations
@@ -162,6 +184,14 @@ const mutations = {
         }, 0)
         var num = Number(originalPrice - (state.reduction / 100) * originalPrice)
         state.price = num.toFixed(2)
+    },
+    [types.INFO_PAGE_LOADED] (state) {
+        state.infoPageAlreadyLoaded = true
+    },
+    [types.SAVE_FORM] (state, { form }) {
+        Object.keys(form).forEach(key => {
+            state.details[key] = form[key]
+        })
     }
 }
 

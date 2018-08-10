@@ -37,8 +37,8 @@
                     <td>
                         <form @submit.prevent="update" @keydown="form.onKeydown($event)">
                             <input v-model="form.coupon" class="form-control" type="text" name="coupon">
-                            <div v-if="errors.length">
-                                <p v-for="error in errors">{{ error }}</p>
+                            <div v-if="couponStatus.length">
+                                <p v-for="error in couponStatus">{{ error }}</p>
                             </div>
                             <v-button :loading="form.busy" type="success">{{ $t('update') }}</v-button>
                         </form>
@@ -77,7 +77,7 @@
             form: new Form({
                 coupon: ''
             }),
-            'errors': [],
+            couponStatus: [],
             value: [
                 { name: 'Javascript', code: 'js' }
             ],
@@ -111,22 +111,22 @@
                 this.updateCurrentToppings()
             },
             async update () {
-                this.errors = []
+                this.couponStatus = []
                 var coupon = this.form.coupon
                 await axios.get(`/api/coupon/` + coupon)
                     .then(response => {
                         if (response.data === 0) {
                             // Invalid
-                            this.errors.push('Coupon invalid');
+                            this.couponStatus.push('Coupon invalid');
                         }
                         else {
                             // Valid
-                            this.errors.push(this.$t('coupon_applied_1') + response.data + this.$t('coupon_applied_2'));
+                            this.couponStatus.push(this.$t('coupon_applied_1') + response.data + this.$t('coupon_applied_2'));
                         }
                         this.applyReduction([response.data, coupon])
                     })
                     .catch(() => {
-                        this.errors.push(this.$t('network_error'));
+                        this.couponStatus.push(this.$t('network_error'));
                     })
             },
             updateCurrentToppings() {

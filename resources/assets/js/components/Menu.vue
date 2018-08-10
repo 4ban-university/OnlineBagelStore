@@ -1,7 +1,4 @@
 <template>
-  <div class="row" v-if="errored">
-    <b-alert class="mx-auto" style="width: 100%;" show variant="danger" v-for="error of errors" v-bind:key="error">{{error.message}}</b-alert>
-  </div>
   <div class="row" v-else>
     <div v-if="loading">
       <b-alert class="mx-auto" style="width: 100%;" show variant="info">{{ $t('loading') }} ...</b-alert>
@@ -50,8 +47,6 @@ export default {
   data () {
     return {
       bagels: [],
-      errors: [],
-      errored: false,
       loading: ''
     }
   },
@@ -60,10 +55,6 @@ export default {
       .then(response => {
         this.bagels = response.data.data;
         this.updateProducts(response.data.data);
-      })
-      .catch(e => {
-        this.errors.push(e);
-        this.errored = true
       })
   }
 }
