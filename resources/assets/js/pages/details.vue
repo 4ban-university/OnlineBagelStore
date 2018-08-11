@@ -58,7 +58,7 @@
         <div class="form-group row" v-if="!form.isPickup">
           <label class="col-md-3 col-form-label text-md-right">{{ $t('number') }}</label>
           <div class="col-md-7">
-            <input v-model="form.number" class="form-control"  v-validate="'required| numeric'" type="text" name="number" :data-vv-as="$t('number')">
+            <input v-model="form.number" class="form-control"  v-validate="'required|numeric'" type="text" name="number" :data-vv-as="$t('number')">
             <span>{{ errors.first('number') }}</span>
           </div>
         </div>
@@ -72,11 +72,22 @@
           </div>
         </div>
 
+        <!-- Apartment number -->
+        <div class="form-group row" v-if="!form.isPickup">
+          <label class="col-md-3 col-form-label text-md-right">{{ $t('apartment') }}</label>
+          <div class="col-md-7">
+            <input v-model="form.apartment" class="form-control" v-validate="'numeric'" type="text" name="apartment" :data-vv-as="$t('apartment')">
+            <span>{{ errors.first('apartment') }}</span>
+          </div>
+        </div>
+
         <!-- Postal code -->
         <div class="form-group row" v-if="!form.isPickup">
           <label class="col-md-3 col-form-label text-md-right">{{ $t('postal_code') }}</label>
           <div class="col-md-7">
-            <input v-model="form.postal_code" class="form-control" v-validate="'required'" type="text" name="postal_code" :data-vv-as="$t('postal_code')">
+            <input type="text" name="postal_code" v-model="form.postal_code"
+                   v-validate="{ required: true, regex: /^[ABCEGHJKLMNPRSTVXY][0-9][ABCEGHJKLMNPRSTVWXYZ] ?[0-9][ABCEGHJKLMNPRSTVWXYZ][0-9]$/i }"
+                   class="form-control" :data-vv-as="$t('postal_code')">
             <span>{{ errors.first('postal_code') }}</span>
           </div>
         </div>
@@ -94,8 +105,11 @@
         <div class="form-group row" v-if="!form.isPickup">
           <label class="col-md-3 col-form-label text-md-right">{{ $t('province') }}</label>
           <div class="col-md-7">
-            <input v-model="form.province" class="form-control" v-validate="'required|alpha'" type="text" name="province" :data-vv-as="$t('province')">
-            <span>{{ errors.first('city') }}</span>
+            <b-form-select v-model="form.province" class="mb-3" v-validate="'required|alpha'" name="province" :data-vv-as="$t('province')">
+              <option value="QC" selected>Québec</option>
+              <option value="ON">Ontario</option>
+            </b-form-select>
+            <span>{{ errors.first('province') }}</span>
           </div>
         </div>
 
@@ -124,12 +138,13 @@
                 name: '',
                 lastname: '',
                 phone: '',
-                isPickup: '',
+                isPickup: true,
                 postal_code: '',
-                street: '',
-                city: '',
-                province: '',
+                street: '+1',
+                city: 'Montreal',
+                province: 'QC',
                 number: '',
+                apartment: '',
                 email: ''
             }
         }),
@@ -164,12 +179,11 @@
                 'saveForm'
             ]),
             sendOrder () {
-                console.log('sendOrder')
                 this.$validator.validateAll().then((result) => {
-                    console.log(result)
                     if (result) {
                         // eslint-disable-next-line
                         this.saveForm(this.form)
+                        this.$router.push({ name: 'payment' })
                         return;
                     }
                 })

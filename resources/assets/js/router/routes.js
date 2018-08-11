@@ -9,6 +9,7 @@ const About = () => import('~/pages/about').then(m => m.default || m)
 const Bagel = () => import('~/pages/bagel').then(m => m.default || m)
 const Cart = () => import('~/pages/cart').then(m => m.default || m)
 const Details = () => import('~/pages/details').then(m => m.default || m)
+const Payment = () => import('~/pages/payment').then(m => m.default || m)
 const Contacts = () => import('~/pages/contacts').then(m => m.default || m)
 const Settings = () => import('~/pages/settings/index').then(m => m.default || m)
 const SettingsProfile = () => import('~/pages/settings/profile').then(m => m.default || m)
@@ -43,6 +44,7 @@ export default [
 
   { path: '/cart', name:'cart', component: Cart },
   { path: '/details', name:'details', component: Details },
+  { path: '/payment', name:'payment', component: Payment },
   { path: '/bagel/:id', name:'bagel', component: Bagel },
 
   { path: '*', component: NotFound }

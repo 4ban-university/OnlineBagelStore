@@ -45,6 +45,7 @@
   "pickup": "Cueillette",
   "delivery": "Livraison",
   "street": "Rue",
+  "apartment": "Appartement",
   "number": "Numéro",
   "city": "Ville",
   "postal_code": "Code Postal",
@@ -64,5 +65,10 @@
   "select_topping": "Choisissez une garniture ou plus",
   "network_error": "Problème réseau",
   "order_info": "Informations sur la commande",
-  "submit": "Envoyer"
+  "submit": "Envoyer",
+  "cc_number": "Numéro carte de crédit",
+  "cvv": "CVV",
+  "expiration_month": "Mois d'expiration",
+  "expiration_year": "Année d'expiration",
+  "payment": "Paiement"
 }

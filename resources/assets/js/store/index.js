@@ -32,13 +32,14 @@ const state = {
         name: '',
         lastname: '',
         email: '',
-        phone: '',
+        phone: '+1',
         isPickup: true,
         street: '',
         postal_code: '',
-        city: '',
+        city: 'Montreal',
         number: '',
-        province: ''
+        apartment: '',
+        province: 'QC'
     },
     coupon: ''
 }

@@ -47,6 +47,7 @@
   "pickup": "Pickup",
   "delivery": "Delivery",
   "street": "Street",
+  "apartment": "Apartment",
   "number": "Number",
   "city": "City",
   "postal_code": "Postal Code",
@@ -65,5 +66,10 @@
   "network_error": "Network error",
   "order_info": "Order information",
   "select_topping": "Select one topping or more",
-  "submit": "Submit"
+  "submit": "Submit",
+  "cc_number": "Credit Card Number",
+  "cvv": "CVV",
+  "expiration_month": "Expiration Month",
+  "expiration_year": "Expiration Year",
+  "payment": "Payment"
 }
