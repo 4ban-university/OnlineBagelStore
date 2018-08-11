@@ -66,7 +66,7 @@
     import Multiselect from 'vue-multiselect'
     import { mapActions, mapGetters } from 'vuex'
     import PlusMinusField from '../components/PlusMinusField.vue'
-
+    import Form from 'vform'
     export default {
         components: {
             'plusminsfield': PlusMinusField,
