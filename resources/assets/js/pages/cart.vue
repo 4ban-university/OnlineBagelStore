@@ -35,12 +35,15 @@
                     <td><b>{{ $t('coupon') }}:</b></td>
                     <td>{{ $t('coupon_info') }}</td>
                     <td>
-                        <form @submit.prevent="update" @keydown="form.onKeydown($event)">
-                            <input v-model="form.coupon" class="form-control" type="text" name="coupon">
-                            <div v-if="couponStatus.length">
+                        <form @submit.prevent="applyCoupon">
+                            <input v-model="formCoupon" v-validate="'required|alpha_num'" class="form-control" type="text" name="coupon">
+                            <span>
+                                <p>{{ errors.first('coupon') }}</p>
+                            </span>
+                            <span v-if="couponStatus.length">
                                 <p v-for="error in couponStatus">{{ error }}</p>
-                            </div>
-                            <v-button :loading="form.busy" type="success">{{ $t('update') }}</v-button>
+                            </span>
+                            <v-button type="success">{{ $t('update') }}</v-button>
                         </form>
                     </td>
                 </tr>
@@ -60,7 +63,6 @@
 
 <script>
     import axios from 'axios'
-    import Form from 'vform'
     import Multiselect from 'vue-multiselect'
     import { mapActions, mapGetters } from 'vuex'
     import PlusMinusField from '../components/PlusMinusField.vue'
@@ -74,9 +76,7 @@
             return { title: this.$t('cart') }
         },
         data: () => ({
-            form: new Form({
-                coupon: ''
-            }),
+            formCoupon: '',
             couponStatus: [],
             value: [
                 { name: 'Javascript', code: 'js' }
@@ -107,24 +107,29 @@
                 this.removeTopping([productId, selectedOption])
                 this.updateCurrentToppings()
             },
-            async update () {
-                this.couponStatus = []
-                var coupon = this.form.coupon
-                await axios.get(`/api/coupon/` + coupon)
-                    .then(response => {
-                        if (response.data === 0) {
-                            // Invalid
-                            this.couponStatus.push('Coupon invalid');
-                        }
-                        else {
-                            // Valid
-                            this.couponStatus.push(this.$t('coupon_applied_1') + response.data + this.$t('coupon_applied_2'));
-                        }
-                        this.applyReduction([response.data, coupon])
-                    })
-                    .catch(() => {
-                        this.couponStatus.push(this.$t('network_error'));
-                    })
+            async applyCoupon () {
+                let parent = this
+                this.$validator.validateAll().then((result) => {
+                    if (result) {
+                        parent.couponStatus = []
+                        let coupon = parent.formCoupon
+                        axios.get(`/api/coupon/` + coupon)
+                            .then(response => {
+                                if (response.data === 0) {
+                                    // Invalid
+                                    parent.couponStatus.push('Coupon invalid');
+                                }
+                                else {
+                                    // Valid
+                                    parent.couponStatus.push(parent.$t('coupon_applied_1') + response.data + parent.$t('coupon_applied_2'));
+                                }
+                                parent.applyReduction([response.data, coupon])
+                            })
+                            .catch(() => {
+                                parent.couponStatus.push(parent.$t('network_error'));
+                            })
+                    }
+                })
             },
             updateCurrentToppings() {
                 this.currentToppings = [];
@@ -141,7 +146,7 @@
         },
         created () {
             this.updatePrice()
-            this.form.coupon = this.coupon
+            this.formCoupon = this.coupon
             axios.get(`/api/toppings`)
                 .then(response => {
                     for (var i = 0; i < response.data.data.length; i++) {
