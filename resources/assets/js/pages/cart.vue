@@ -117,7 +117,7 @@
                             .then(response => {
                                 if (response.data === 0) {
                                     // Invalid
-                                    parent.couponStatus.push('Coupon invalid');
+                                    parent.couponStatus.push(parent.$t('coupon_invalid'));
                                 }
                                 else {
                                     // Valid

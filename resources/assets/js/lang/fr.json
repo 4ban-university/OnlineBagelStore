@@ -58,6 +58,7 @@
   "your_cart": "Votre panier",
   "cart": "Panier",
   "coupon": "Coupon",
+  "coupon_invalid": "Coupon invalide",
   "coupon_info": "Si vous avez un coupon, entrez son code ici",
   "coupon_applied_1": "Réduction de ",
   "coupon_applied_2": "% appliquée",
