@@ -157,8 +157,8 @@ const mutations = {
     },
     [types.ADD_PRODUCTS] (state, { products }) {
         state.all = []
-        for (var i = 0; i < products.length; i++) {
-            var product = {
+        for (let i = 0; i < products.length; i++) {
+            let product = {
                 id: products[i].id,
                 title: products[i].title,
                 price: products[i].price,
@@ -183,10 +183,10 @@ const mutations = {
         state.coupon = coupon
     },
     [types.UPDATE_PRICE] (state) {
-        var originalPrice = getCartProducts(state).reduce((total, p) => {
+        let originalPrice = getCartProducts(state).reduce((total, p) => {
             return total + p.price * p.quantity
         }, 0)
-        var num = Number(originalPrice - (state.reduction / 100) * originalPrice)
+        let num = Number(originalPrice - (state.reduction / 100) * originalPrice)
         state.price = num.toFixed(2)
     },
     [types.INFO_PAGE_LOADED] (state) {

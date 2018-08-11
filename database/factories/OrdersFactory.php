@@ -11,7 +11,6 @@ $factory->define(App\Order::class, function (Faker $faker) {
         'street_name'=> $faker->text(10),
         'apartment'=> $faker->randomFloat(0,1, 100),
         'postcode'=> $faker->text(6),
-        'province'=> 'QC',
-        'payment_option' => $faker-> numberBetween(1, 4)
+        'province'=> 'QC'
     ];
 });

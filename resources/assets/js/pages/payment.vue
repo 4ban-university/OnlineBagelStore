@@ -53,6 +53,14 @@
           </div>
         </div>
 
+        <!-- Price -->
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label text-md-right">{{ $t('price') }}</label>
+          <div class="col-md-7">
+            <span>{{ this.price }}</span>
+          </div>
+        </div>
+
         <!-- Submit Button -->
         <div class="form-group row">
           <div class="col-md-9 ml-md-auto">
@@ -66,6 +74,7 @@
 
 <script>
     import { mapActions, mapGetters } from 'vuex'
+    import axios from 'axios'
 
     export default {
         metaInfo () {
@@ -87,6 +96,7 @@
             authenticated: 'auth/check',
             user: 'auth/user',
             products: 'cartProducts',
+            price: 'price',
             details: 'details',
             infoPageAlreadyLoaded: 'infoPageAlreadyLoaded'
         }),
@@ -99,7 +109,79 @@
             sendOrder () {
                 this.$validator.validateAll().then((result) => {
                     if (result) {
-                        // eslint-disable-next-line
+                        let order = {
+                            customer: this.details.customer,
+                            price: this.price,
+                            street_number: this.details.street_number,
+                            street_name: this.details.street_name,
+                            apartment: this.details.apartment,
+                            postcode: this.details.postcode,
+                            province: this.details.province,
+                            items: []
+                        }
+
+                        for (let i = 0; i < this.products.length; i++) {
+                            let product = {
+                                product_id: this.products[i].id,
+                                amount: this.products[i].quantity,
+                                toppings: []
+                            }
+                            for (let j = 0; j < this.products.toppings.length; i++) {
+                                let topping = {
+                                    topping_id: this.products[i].toppings[j].code,
+                                    amount: this.products[i].quantity,
+                                }
+                                product.toppings.push(topping)
+                            }
+                            order.items.push(product)
+                        }
+
+                        axios.post('/user', order)
+                            .then(function (response) {
+                                console.log(response);
+                            })
+                            .catch(function (error) {
+                                console.log(error);
+                            });
+                        /**
+                         {
+                          "customer": "Sequi.",
+                          "promotion": "Eum est.",
+                          "price": 6.37,
+                          "street_number": "3886",
+                          "street_name": "Rue Ethel",
+                          "apartment": "",
+                          "postcode": "H4G1S3",
+                          "payment_option": 1,
+                          "province": "QC",
+                          "items": [
+                              {
+                                  "product_id": 20,
+                                  "amount": 3,
+                                  "toppings": [
+                                          {
+                                              "topping_id": 4
+                                          },
+                                          {
+                                              "topping_id": 1
+                                          }
+                                  ]
+                              },
+                                      {
+                                  "bagel_id": 1,
+                                  "amount": 5,
+                                  "toppings": [
+                                          {
+                                              "topping_id": 2
+                                          },
+                                          {
+                                              "topping_id": 1
+                                          }
+                                  ]
+                              }
+                          ]
+                      }
+                         */
                         // todo: POST to backend using this.details
                         return;
                     }

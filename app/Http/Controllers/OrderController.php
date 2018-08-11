@@ -42,10 +42,12 @@ class OrderController extends Controller
     {
         $order = new Order;
         $order->customer    = $request->input('customer');
-        $order->promotion   = $request->input('promotion');
         $order->price       = $request->input('price');
-        $order->delivery_address    = $request->input('delivery_address');
-        $order->payment_option      = $request->input('payment_option');
+        $order->street_number = $request->input('street_number');
+        $order->street_name   = $request->input('street_name');
+        $order->apartment   = $request->input('apartment');
+        $order->postcode    = $request->input('postcode');
+        $order->province    = $request->input('province');
         $order->save();
 
         foreach ($request->input('items') as $item_input){
