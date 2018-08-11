@@ -37,7 +37,6 @@ Route::group(['middleware' => 'guest:api'], function () {
 // APIs
 
 // Products API
-
 // List Products
 Route::get('products', 'ProductsController@index');
 
@@ -53,8 +52,8 @@ Route::put('product/{id}', 'ProductsController@update');
 // Delete Bagel
 Route::delete('product/{id}', 'ProductsController@destroy');
 
-// Toppings API
 
+// Toppings API
 // List Toppings
 Route::get('toppings', 'ToppingController@index');
 
@@ -72,7 +71,6 @@ Route::delete('topping/{id}', 'ToppingController@destroy');
 
 
 // Orders API
-
 // List Orders
 Route::get('orders', 'OrderController@index');
 
@@ -90,3 +88,25 @@ Route::delete('order/{id}', 'OrderController@destroy');
 
 // Check coupon existence
 Route::get('coupon/{name}', 'CouponController@isValid');
+
+
+// locale API
+// Get texts for locale
+Route::get('/locale/{locale}', 'LocaleTextController@index');
+
+
+// Texts API
+// List Orders
+Route::get('texts', 'ProductTextController@index');
+
+// List Order
+Route::get('text/{id}', 'ProductTextController@show');
+
+// Create Order
+Route::post('text', 'ProductTextController@store');
+
+// Edit Order
+Route::put('text/{id}', 'ProductTextController@update');
+
+// Delete Order
+Route::delete('text/{id}', 'ProductTextController@destroy');
