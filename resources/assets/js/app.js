@@ -17,11 +17,11 @@ import VeeValidate from 'vee-validate';
 
 Vue.use(Toasted, {
   duration: 3000
-});
+})
 
-Vue.use(BootstrapVue);
+Vue.use(BootstrapVue)
 
-Vue.use(VeeValidate);
+Vue.use(VeeValidate)
 
 Vue.config.productionTip = false
 

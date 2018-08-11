@@ -37,6 +37,7 @@ const state = {
         street: '',
         postal_code: '',
         city: '',
+        number: '',
         province: ''
     },
     coupon: ''

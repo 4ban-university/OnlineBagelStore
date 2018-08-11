@@ -45,6 +45,7 @@
   "pickup": "Cueillette",
   "delivery": "Livraison",
   "street": "Rue",
+  "number": "Numéro",
   "city": "Ville",
   "postal_code": "Code Postal",
   "province": "Province",

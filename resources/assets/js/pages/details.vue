@@ -11,7 +11,8 @@
         <div class="form-group row">
           <label class="col-md-3 col-form-label text-md-right">{{ $t('name') }}</label>
           <div class="col-md-7">
-            <input v-model="form.name" class="form-control" type="text" name="name">
+            <input v-model="form.name" class="form-control" v-validate="'required|alpha'" type="text" name="name" :data-vv-as="$t('name')">
+            <span>{{ errors.first('name') }}</span>
           </div>
         </div>
 
@@ -19,7 +20,8 @@
         <div class="form-group row">
           <label class="col-md-3 col-form-label text-md-right">{{ $t('lastname') }}</label>
           <div class="col-md-7">
-            <input v-model="form.lastname" class="form-control" type="text" name="lastname">
+            <input v-model="form.lastname" class="form-control" v-validate="'required|alpha'" type="text" name="lastname" :data-vv-as="$t('lastname')">
+            <span>{{ errors.first('lastname') }}</span>
           </div>
         </div>
 
@@ -27,7 +29,7 @@
         <div class="form-group row">
           <label class="col-md-3 col-form-label text-md-right">{{ $t('email') }}</label>
           <div class="col-md-7">
-            <input v-model="form.email" v-validate.initial="'required|email'" name="email" type="text" class="form-control">
+            <input v-model="form.email" v-validate="'required|email'" name="email" type="text" class="form-control" :data-vv-as="$t('email')">
             <span>{{ errors.first('email') }}</span>
           </div>
         </div>
@@ -36,7 +38,8 @@
         <div class="form-group row">
           <label class="col-md-3 col-form-label text-md-right">{{ $t('phone') }}</label>
           <div class="col-md-7">
-            <input v-model="form.phone" class="form-control" type="text" name="phone">
+            <input v-model="form.phone" v-validate="'required|phoneNumber'" class="form-control" type="text" name="phone" :data-vv-as="$t('phone')">
+            <span>{{ errors.first('phone') }}</span>
           </div>
         </div>
 
@@ -51,11 +54,21 @@
           </div>
         </div>
 
+        <!-- Street number -->
+        <div class="form-group row" v-if="!form.isPickup">
+          <label class="col-md-3 col-form-label text-md-right">{{ $t('number') }}</label>
+          <div class="col-md-7">
+            <input v-model="form.number" class="form-control"  v-validate="'required| numeric'" type="text" name="number" :data-vv-as="$t('number')">
+            <span>{{ errors.first('number') }}</span>
+          </div>
+        </div>
+
         <!-- Street name -->
         <div class="form-group row" v-if="!form.isPickup">
           <label class="col-md-3 col-form-label text-md-right">{{ $t('street') }}</label>
           <div class="col-md-7">
-            <input v-model="form.street" class="form-control" type="text" name="street">
+            <input v-model="form.street" class="form-control" v-validate="'required|alpha'" type="text" name="street" :data-vv-as="$t('street')">
+            <span>{{ errors.first('street') }}</span>
           </div>
         </div>
 
@@ -63,7 +76,8 @@
         <div class="form-group row" v-if="!form.isPickup">
           <label class="col-md-3 col-form-label text-md-right">{{ $t('postal_code') }}</label>
           <div class="col-md-7">
-            <input v-model="form.postal_code" class="form-control" type="text" name="postal_code">
+            <input v-model="form.postal_code" class="form-control" v-validate="'required'" type="text" name="postal_code" :data-vv-as="$t('postal_code')">
+            <span>{{ errors.first('postal_code') }}</span>
           </div>
         </div>
 
@@ -71,7 +85,8 @@
         <div class="form-group row" v-if="!form.isPickup">
           <label class="col-md-3 col-form-label text-md-right">{{ $t('city') }}</label>
           <div class="col-md-7">
-            <input v-model="form.city" class="form-control" type="text" name="city">
+            <input v-model="form.city" class="form-control" v-validate="'required|alpha'" type="text" name="city" :data-vv-as="$t('city')">
+            <span>{{ errors.first('city') }}</span>
           </div>
         </div>
 
@@ -79,14 +94,15 @@
         <div class="form-group row" v-if="!form.isPickup">
           <label class="col-md-3 col-form-label text-md-right">{{ $t('province') }}</label>
           <div class="col-md-7">
-            <input v-model="form.province" class="form-control" type="text" name="province">
+            <input v-model="form.province" class="form-control" v-validate="'required|alpha'" type="text" name="province" :data-vv-as="$t('province')">
+            <span>{{ errors.first('city') }}</span>
           </div>
         </div>
 
         <!-- Submit Button -->
         <div class="form-group row">
           <div class="col-md-9 ml-md-auto">
-            <v-button v-on:click="sendOrder" type="success">{{ $t('submit') }}</v-button>
+            <b-button v-on:click="sendOrder" type="success">{{ $t('submit') }}</b-button>
           </div>
         </div>
       </form>
@@ -113,6 +129,7 @@
                 street: '',
                 city: '',
                 province: '',
+                number: '',
                 email: ''
             }
         }),
@@ -147,7 +164,15 @@
                 'saveForm'
             ]),
             sendOrder () {
-                this.saveForm(this.form)
+                console.log('sendOrder')
+                this.$validator.validateAll().then((result) => {
+                    console.log(result)
+                    if (result) {
+                        // eslint-disable-next-line
+                        this.saveForm(this.form)
+                        return;
+                    }
+                })
             }
         }
     }

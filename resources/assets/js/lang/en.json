@@ -47,6 +47,7 @@
   "pickup": "Pickup",
   "delivery": "Delivery",
   "street": "Street",
+  "number": "Number",
   "city": "City",
   "postal_code": "Postal Code",
   "province": "Province",
