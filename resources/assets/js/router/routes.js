@@ -6,7 +6,7 @@ const PasswordReset = () => import('~/pages/auth/password/reset').then(m => m.de
 const NotFound = () => import('~/pages/errors/404').then(m => m.default || m)
 
 const About = () => import('~/pages/about').then(m => m.default || m)
-const Bagel = () => import('~/pages/bagel').then(m => m.default || m)
+const Product = () => import('~/pages/product').then(m => m.default || m)
 const Cart = () => import('~/pages/cart').then(m => m.default || m)
 const Details = () => import('~/pages/details').then(m => m.default || m)
 const Payment = () => import('~/pages/payment').then(m => m.default || m)
@@ -45,7 +45,8 @@ export default [
   { path: '/cart', name:'cart', component: Cart },
   { path: '/details', name:'details', component: Details },
   { path: '/payment', name:'payment', component: Payment },
-  { path: '/bagel/:id', name:'bagel', component: Bagel },
+  { path: '/bagel/:id', name:'bagel', component: Product },
+  { path: '/drink/:id', name:'drink', component: Product },
 
   { path: '*', component: NotFound }
 ]

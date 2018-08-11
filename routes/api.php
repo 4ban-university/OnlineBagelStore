@@ -36,22 +36,22 @@ Route::group(['middleware' => 'guest:api'], function () {
 
 // APIs
 
-// Bagels API
+// Products API
 
-// List Bagels
-Route::get('bagels', 'BagelsController@index');
+// List Products
+Route::get('products', 'ProductsController@index');
 
 // List Bagel
-Route::get('bagel/{id}', 'BagelsController@show');
+Route::get('product/{id}', 'ProductsController@show');
 
 // Create Bagel
-Route::post('bagel', 'BagelsController@store');
+Route::post('product', 'ProductsController@store');
 
 // Edit Bagel
-Route::put('bagel/{id}', 'BagelsController@update');
+Route::put('product/{id}', 'ProductsController@update');
 
 // Delete Bagel
-Route::delete('bagel/{id}', 'BagelsController@destroy');
+Route::delete('product/{id}', 'ProductsController@destroy');
 
 // Toppings API
 

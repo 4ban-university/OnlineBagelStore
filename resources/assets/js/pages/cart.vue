@@ -22,7 +22,7 @@
                     </tr>
                     <tr>
                         <td></td>
-                        <td>
+                        <td v-if="p.type === 1">
                             <multiselect :value="currentToppings.find(element => element.product_id === p.id).toppings"
                                          :placeholder="$t('select_topping')"
                                          label="name" track-by="code" :options="toppingsAvailable" :multiple="true" :id="p.id"
@@ -99,9 +99,6 @@
                 'addTopping',
                 'removeTopping',
             ]),
-            checkout(){
-                alert('Pay us $' + this.price)
-            },
             selectTag(selectedOption, productId) {
                 this.addTopping([productId, selectedOption])
                 this.updateCurrentToppings()

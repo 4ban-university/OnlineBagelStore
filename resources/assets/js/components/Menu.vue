@@ -1,28 +1,53 @@
 <template>
-  <div class="row" v-else>
-    <div v-if="loading">
-      <b-alert class="mx-auto" style="width: 100%;" show variant="info">{{ $t('loading') }} ...</b-alert>
-    </div>
-    <div class="col-md-3" v-else v-for="bagel of bagels" v-bind:key="bagel.id">
-      <b-card no-body
-              :img-src="bagel.image ||'https://canadatwoway.com/wp-content/uploads/2017/11/No_Image_Available.jpg'"
-              img-alt="Image"
-              img-top
-              class="mb-1 mt-1"
-              border-variant="secondary">
-        <b-card-body>
-          <b-link :to="{ name: 'bagel', params: { id: bagel.id }}">
-            <h4 class="card-title">{{ bagel.title }}</h4>
-            <h6 class="card-subtitle">{{ bagel.description }}</h6>
-          </b-link>
-        </b-card-body>
-        <div slot="footer">
-          <small class="text-muted" align="right">Calories: {{bagel.calories}}</small>
-          <b-btn size="sm" style="float: right" variant="warning" @click='addToCart(bagel)' v-on:click="toast(bagel.title)">{{ $t('add') }}</b-btn>
-        </div>
-      </b-card>
-    </div>
+  <div class="row" v-if="loading">
+        <b-alert class="mx-auto" style="width: 100%;" show variant="info">{{ $t('loading') }} ...</b-alert>
   </div>
+    <div v-else>
+      <h3>{{ $t('our_bagels') }}</h3>
+      <div class="row">
+        <div class="col-md-3" v-for="bagel of bagels" v-bind:key="bagel.id">
+          <b-card no-body
+                  :img-src="bagel.image ||'https://canadatwoway.com/wp-content/uploads/2017/11/No_Image_Available.jpg'"
+                  img-alt="Image"
+                  img-top
+                  class="mb-1 mt-1"
+                  border-variant="secondary">
+            <b-card-body>
+              <b-link :to="{ name: 'bagel', params: { id: bagel.id }}">
+                <h4 class="card-title">{{ bagel.title }}</h4>
+                <h6 class="card-subtitle">{{ bagel.description }}</h6>
+              </b-link>
+            </b-card-body>
+            <div slot="footer">
+              <small class="text-muted" align="right">Calories: {{bagel.calories}}</small>
+              <b-btn size="sm" style="float: right" variant="warning" @click='addToCart(bagel)' v-on:click="toast(bagel.title)">{{ $t('add') }}</b-btn>
+            </div>
+          </b-card>
+        </div>
+      </div>
+      <h3>{{ $t('fancy_drink') }}</h3>
+      <div class="row">
+        <div class="col-md-3" v-for="drink of drinks" v-bind:key="drink.id">
+          <b-card no-body
+                  :img-src="drink.image ||'https://canadatwoway.com/wp-content/uploads/2017/11/No_Image_Available.jpg'"
+                  img-alt="Image"
+                  img-top
+                  class="mb-1 mt-1"
+                  border-variant="secondary">
+            <b-card-body>
+              <b-link :to="{ name: 'drink', params: { id: drink.id }}">
+                <h4 class="card-title">{{ drink.title }}</h4>
+                <h6 class="card-subtitle">{{ drink.description }}</h6>
+              </b-link>
+            </b-card-body>
+            <div slot="footer">
+              <small class="text-muted" align="right">Calories: {{drink.calories}}</small>
+              <b-btn size="sm" style="float: right" variant="warning" @click='addToCart(drink)' v-on:click="toast(drink.title)">{{ $t('add') }}</b-btn>
+            </div>
+          </b-card>
+        </div>
+      </div>
+    </div>
 </template>
 
 <script>
@@ -32,7 +57,6 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'Menu',
   computed: mapGetters({
-      products: 'allProducts',
       length: 'getNumberOfProducts'
   }),
   methods: {
@@ -46,14 +70,18 @@ export default {
   },
   data () {
     return {
+      products: [],
       bagels: [],
+      drinks: [],
       loading: ''
     }
   },
   created () {
-    axios.get(`/api/bagels`)
+    axios.get(`/api/products`)
       .then(response => {
-        this.bagels = response.data.data;
+        this.products = response.data.data;
+        this.bagels = this.products.filter(b => b.type === 1)
+        this.drinks = this.products.filter(b => b.type !== 1)
         this.updateProducts(response.data.data);
       })
   }

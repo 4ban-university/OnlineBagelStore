@@ -137,10 +137,10 @@
             form: {
                 name: '',
                 lastname: '',
-                phone: '',
+                phone: '+1',
                 isPickup: true,
                 postal_code: '',
-                street: '+1',
+                street: '',
                 city: 'Montreal',
                 province: 'QC',
                 number: '',

@@ -11,6 +11,6 @@ class BagelsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Bagel::class, 20)->create();
+        factory(App\Product::class, 20)->create();
     }
 }

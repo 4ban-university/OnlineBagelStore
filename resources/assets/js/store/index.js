@@ -55,6 +55,7 @@ function getCartProducts(state) {
             calories: product.calories,
             description: product.description,
             image: product.image,
+            type: product.type,
             quantity
         }
     })
@@ -163,6 +164,7 @@ const mutations = {
                 price: products[i].price,
                 calories: products[i].calories,
                 description: products[i].description,
+                type: products[i].type,
                 image: products[i].image
             }
             state.all.push(product)

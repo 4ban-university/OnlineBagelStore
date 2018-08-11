@@ -20,6 +20,6 @@ class OrderItem extends Model
 
     public function bagel()
     {
-        return $this->belongsTo('App\Bagel');
+        return $this->belongsTo('App\Product');
     }
 }
