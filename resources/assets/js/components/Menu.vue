@@ -13,7 +13,7 @@
                   <p class="text text-left pl-2 pr-2 mb-2">{{ $t('bagel.' + bagel.id + '.description') }}</p>
                   <div class="row no-gutters">
                     <div class="col-6">
-                      <p class="calories mb-2 pl-2">{{ $t('calories')}}: {{bagel.calories }}</p>
+                      <p class="calories mb-2 pl-2">{{$t('calories')}}: {{bagel.calories }}</p>
                     </div>
                     <div class="col-6">
                       <button @click.prevent="addToCart(bagel);toast($t('bagel.' + bagel.id + '.title'));">Add</button>
@@ -34,7 +34,7 @@
                 <p class="text text-left pl-2 pr-2 mb-2">{{ $t('drink.' + drink.id + '.description') }}</p>
                 <div class="row no-gutters">
                   <div class="col-6">
-                    <p class="calories mb-2 pl-2">{{ $t('calories')}}: {{ drink.calories }}</p>
+                    <p class="calories mb-2 pl-2">{{$t('calories')}}: {{ drink.calories }}</p>
                   </div>
                   <div class="col-6">
                     <button @click='addToCart(drink)' v-on:click="toast($t('bagel.' + drink.id + '.title'))">Add</button>
@@ -76,7 +76,12 @@ export default {
     ]),
     toast: function(title) {
       this.$toasted.show(`${title} ${this.$t('add_to_cart')}`);
-    }
+    },
+    setAllergy(id) {
+       if (id == 0)
+         return "No";
+       else return "Yes";
+     }
   },
   data () {
     return {
@@ -99,14 +104,14 @@ export default {
       .then(response => {
         this.toppings = response.data.data;
       })
-  },
-  methods: {
-    setAllergy(id) {
-      if (id == 0)
-        return "No";
-      else return "Yes";
-    }
   }
+  // methods: {
+  //   setAllergy(id) {
+  //     if (id == 0)
+  //       return "No";
+  //     else return "Yes";
+  //   }
+  // }
 }
 </script>
 
