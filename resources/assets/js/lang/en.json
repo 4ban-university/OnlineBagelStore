@@ -74,5 +74,15 @@
   "cvv": "CVV",
   "expiration_month": "Expiration Month",
   "expiration_year": "Expiration Year",
-  "payment": "Payment"
+  "your_order": "Your Order",
+  "payment": "Payment",
+  "bagels": "Bagels",
+  "order_id": "Order Number",
+  "date": "Date",
+  "order_type": "Order Type",
+  "status": "Status",
+  "topping": "Topping",
+  "paid": "Paid",
+  "in_progress": "In progress",
+  "welcome": "Home"
 }

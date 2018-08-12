@@ -4,6 +4,13 @@
   "error_alert_title": "Oups...",
   "loading": "Loading...",
   "our_bagels": "Nos bagels",
+  "your_order": "Votre commande",
+  "bagels": "Bagels",
+  "order_id": "Numéro de la commande",
+  "date": "Date",
+  "order_type": "Type de la commande",
+  "status": "Etat",
+  "topping": "Garniture",
   "fancy_drink": "Envie d'une boisson ?",
   "error_alert_text": "Erreur, merci de réessayer plus tard.",
   "token_expired_alert_title": "Session expirée!",
@@ -74,5 +81,8 @@
   "cvv": "CVV",
   "expiration_month": "Mois d'expiration",
   "expiration_year": "Année d'expiration",
-  "payment": "Paiement"
+  "payment": "Paiement",
+  "paid": "Payée",
+  "in_progress": "En cours",
+  "welcome": "Accueil"
 }

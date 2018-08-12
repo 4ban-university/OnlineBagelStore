@@ -139,11 +139,12 @@
 
                         axios.post('/api/order', order)
                             .then(function (response) {
-                                alert('done')
-                                // todo: redirect to order page
+                                parent.$router.push({ name: 'order', params: {
+                                    id: response.data.data.id
+                                    } })
                             })
                             .catch(function (error) {
-                                alert('error')
+                                console.log(error)
                             });
                         return;
                     }
