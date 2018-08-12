@@ -3,9 +3,11 @@
     <div class="text-center">
       <div class="title mb-4">
         {{ title }}
+      </div>
+      <div>
         <h1 class="mt-5">{{ $t('about_us') }}</h1>
         <p class="lead">{{ $t('about_info') }}</p>
-        <p>For more information please <router-link to="/contacts">contact</router-link> us.</p>
+        <p>{{ $t('for_more_info') }}, <router-link to="/contacts">{{ $t('contact_us_page') }}</router-link>.</p>
       </div>
     </div>
   </div>
