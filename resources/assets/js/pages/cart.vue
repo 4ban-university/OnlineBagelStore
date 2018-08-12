@@ -35,8 +35,8 @@
                     <td><b>{{ $t('coupon') }}:</b></td>
                     <td>{{ $t('coupon_info') }}</td>
                     <td>
-                        <form @submit.prevent="update">
-                            <input v-model="form.coupon" class="form-control mb-3" type="text" name="coupon">
+                        <form @submit.prevent="applyCoupon">
+                            <input v-model="form.coupon" v-validate="'required|alpha_num'" class="form-control mb-3" type="text" name="coupon">
                             <div class="mt-3 mb-3" v-if="couponValid">
                                 <b-alert variant="success" show>{{couponValid}}</b-alert>
                             </div>
@@ -110,7 +110,7 @@
                 this.removeTopping([productId, selectedOption])
                 this.updateCurrentToppings()
             },
-            async update () {
+            async applyCoupon () {
                 var coupon = this.form.coupon;
                 if(coupon === ''){
                     // Invalid coupon
