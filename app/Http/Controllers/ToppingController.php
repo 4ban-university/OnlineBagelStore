@@ -21,16 +21,6 @@ class ToppingController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -59,50 +49,5 @@ class ToppingController extends Controller
     {
         $topping = Topping::FindOrFail($id);
         return new ToppingResource($topping);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        $topping = Topping::findOrFail($id);
-        $topping->title = $request->input('title');
-        $topping->calories = $request->input('calories');
-        $topping->description = $request->input('description');
-        $topping->allergyfree = $request->input('allergyfree');
-
-        if($topping->save()) {
-            return new ToppingResource($topping);
-        }
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $topping = Topping::findOrFail($id);
-        if($topping->delete()) {
-            return new ToppingResource($topping);
-        }
     }
 }

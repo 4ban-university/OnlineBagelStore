@@ -36,14 +36,17 @@
                     <td>{{ $t('coupon_info') }}</td>
                     <td>
                         <form @submit.prevent="applyCoupon">
-                            <input v-model="form.coupon" v-validate="'required|alpha_num'" class="form-control mb-3" type="text" name="coupon">
+                            <input v-model="formCoupon" v-validate="'required|alpha_num'" class="form-control" type="text" name="coupon">
+                            <span>
+                                <p>{{ errors.first('coupon') }}</p>
+                            </span>
                             <div class="mt-3 mb-3" v-if="couponValid">
                                 <b-alert variant="success" show>{{couponValid}}</b-alert>
                             </div>
                             <div class="mt-3 mb-3" v-if="couponInValid">
                                 <b-alert variant="danger" show>{{couponInValid}}</b-alert>
                             </div>
-                            <v-button :loading="form.busy" type="success">{{ $t('update') }}</v-button>
+                            <v-button type="success">{{ $t('update') }}</v-button>
                         </form>
                     </td>
                 </tr>
@@ -76,9 +79,6 @@
             return { title: this.$t('cart') }
         },
         data: () => ({
-            form: new Form({
-                coupon: ''
-            }),
             couponValid: null,
             couponInValid: null,
             value: [
@@ -111,31 +111,37 @@
                 this.updateCurrentToppings()
             },
             async applyCoupon () {
-                var coupon = this.form.coupon;
-                if(coupon === ''){
+                if(this.formCoupon === ''){
                     // Invalid coupon
                     this.couponInValid = this.$t('coupon_invalid');
                     this.couponValid = null;
                     return;
                 }
-                await axios.get(`/api/coupon/` + coupon)
-                    .then(response => {
-                        if (response.data === 0) {
-                            // Invalid
-                            this.couponInValid = this.$t('coupon_invalid');
-                            this.couponValid = null;
-                        }
-                        else {
-                            // Valid
-                            this.couponValid = this.$t('coupon_applied_1') + response.data + this.$t('coupon_applied_2');
-                            this.couponInValid = null;
-                        }
-                        this.applyReduction([response.data, coupon])
-                    })
-                    .catch(() => {
-                        this.couponInValid = this.$t('network_error');
-                        this.couponValid = null;
-                    })
+                let parent = this
+                this.$validator.validateAll().then((result) => {
+                    if (result) {
+                        parent.couponStatus = []
+                        let coupon = parent.formCoupon
+                        axios.get(`/api/coupon/` + coupon)
+                            .then(response => {
+                                if (response.data === 0) {
+                                    // Invalid
+                                    parent.couponInValid = this.$t('coupon_invalid');
+                                    parent.couponValid = null;
+                                }
+                                else {
+                                    // Valid
+                                    parent.couponValid = this.$t('coupon_applied_1') + response.data + this.$t('coupon_applied_2');
+                                    parent.couponInValid = null;
+                                }
+                                parent.applyReduction([response.data, coupon])
+                            })
+                            .catch(() => {
+                                parent.couponInValid = this.$t('network_error');
+                                parent.couponValid = null;
+                            })
+                    }
+                })
             },
             updateCurrentToppings() {
                 this.currentToppings = [];

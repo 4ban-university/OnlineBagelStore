@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class OrderItem extends Model
 {
-    protected $fillable = ['bagel_id', 'amount'];
+    protected $fillable = ['product_id', 'amount'];
 
     public function toppings()
     {
@@ -18,7 +18,7 @@ class OrderItem extends Model
         return $this->belongsTo('App\Order');
     }
 
-    public function bagel()
+    public function product()
     {
         return $this->belongsTo('App\Product');
     }

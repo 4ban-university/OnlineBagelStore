@@ -6,8 +6,6 @@
       <router-link to="/">{{ $t('go_shopping') }}</router-link>
     </p>
     <card :title="$t('payment')" v-show="products.length">
-      <form @submit.prevent="">
-
         <!-- Name -->
         <div class="form-group row">
           <label class="col-md-3 col-form-label text-md-right">{{ $t('name') }}</label>
@@ -57,7 +55,7 @@
         <div class="form-group row">
           <label class="col-md-3 col-form-label text-md-right">{{ $t('price') }}</label>
           <div class="col-md-7">
-            <span>{{ this.price }}</span>
+            <span>${{ this.price }}</span>
           </div>
         </div>
 
@@ -67,7 +65,6 @@
             <b-button v-on:click="sendOrder" type="success">{{ $t('submit') }}</b-button>
           </div>
         </div>
-      </form>
     </card>
   </div>
 </template>
@@ -96,6 +93,7 @@
             authenticated: 'auth/check',
             user: 'auth/user',
             products: 'cartProducts',
+            toppings: 'toppings',
             price: 'price',
             details: 'details',
             infoPageAlreadyLoaded: 'infoPageAlreadyLoaded'
@@ -107,82 +105,46 @@
                 'saveForm'
             ]),
             sendOrder () {
+                let parent = this
                 this.$validator.validateAll().then((result) => {
                     if (result) {
                         let order = {
-                            customer: this.details.customer,
-                            price: this.price,
-                            street_number: this.details.street_number,
-                            street_name: this.details.street_name,
-                            apartment: this.details.apartment,
-                            postcode: this.details.postcode,
-                            province: this.details.province,
+                            customer: parent.details.name,
+                            price: parent.price,
+                            street_number: parent.details.number,
+                            street_name: parent.details.street,
+                            apartment: parent.details.apartment,
+                            phone: parent.details.phone,
+                            postcode: parent.details.postal_code,
+                            isPickup: parent.details.isPickup,
+                            province: parent.details.province,
                             items: []
                         }
 
-                        for (let i = 0; i < this.products.length; i++) {
+                        for (let i = 0; i < parent.products.length; i++) {
                             let product = {
-                                product_id: this.products[i].id,
-                                amount: this.products[i].quantity,
+                                product_id: parent.products[i].id,
+                                amount: parent.products[i].quantity,
                                 toppings: []
                             }
-                            for (let j = 0; j < this.products.toppings.length; i++) {
+                            let toppings = parent.toppings(product.product_id)
+                            for (let j = 0; j < toppings.length; j++) {
                                 let topping = {
-                                    topping_id: this.products[i].toppings[j].code,
-                                    amount: this.products[i].quantity,
+                                    topping_id: toppings[j].code
                                 }
                                 product.toppings.push(topping)
                             }
                             order.items.push(product)
                         }
 
-                        axios.post('/user', order)
+                        axios.post('/api/order', order)
                             .then(function (response) {
-                                console.log(response);
+                                alert('done')
+                                // todo: redirect to order page
                             })
                             .catch(function (error) {
-                                console.log(error);
+                                alert('error')
                             });
-                        /**
-                         {
-                          "customer": "Sequi.",
-                          "promotion": "Eum est.",
-                          "price": 6.37,
-                          "street_number": "3886",
-                          "street_name": "Rue Ethel",
-                          "apartment": "",
-                          "postcode": "H4G1S3",
-                          "payment_option": 1,
-                          "province": "QC",
-                          "items": [
-                              {
-                                  "product_id": 20,
-                                  "amount": 3,
-                                  "toppings": [
-                                          {
-                                              "topping_id": 4
-                                          },
-                                          {
-                                              "topping_id": 1
-                                          }
-                                  ]
-                              },
-                                      {
-                                  "bagel_id": 1,
-                                  "amount": 5,
-                                  "toppings": [
-                                          {
-                                              "topping_id": 2
-                                          },
-                                          {
-                                              "topping_id": 1
-                                          }
-                                  ]
-                              }
-                          ]
-                      }
-                         */
-                        // todo: POST to backend using this.details
                         return;
                     }
                 })

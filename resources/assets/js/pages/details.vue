@@ -67,7 +67,7 @@
         <div class="form-group row" v-if="!form.isPickup">
           <label class="col-md-3 col-form-label text-md-right">{{ $t('street') }}</label>
           <div class="col-md-7">
-            <input v-model="form.street" class="form-control" v-validate="'required|alpha'" type="text" name="street" :data-vv-as="$t('street')">
+            <input v-model="form.street" class="form-control" v-validate="'required|alpha_spaces'" type="text" name="street" :data-vv-as="$t('street')">
             <span>{{ errors.first('street') }}</span>
           </div>
         </div>

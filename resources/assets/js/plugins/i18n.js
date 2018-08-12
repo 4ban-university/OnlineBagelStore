@@ -16,7 +16,6 @@ const i18n = new VueI18n({
  */
 export async function loadMessages (locale) {
   if (Object.keys(i18n.getLocaleMessage(locale)).length === 0) {
-      console.log('first import')
     await import(/* webpackChunkName: "lang-[request]" */ `~/lang/${locale}`).then(messages => {
         axios.get(`/api/locale/${locale}`)
             .then(response => {

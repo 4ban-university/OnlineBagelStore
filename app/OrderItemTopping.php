@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class OrderItemTopping extends Model
 {
-    protected $fillable = ['order_item_id','topping_id'];
+    protected $fillable = ['order_item_id', 'topping_id'];
 
     public function orderItem()
     {
@@ -15,6 +15,6 @@ class OrderItemTopping extends Model
 
     public function topping()
     {
-        return $this->hasOne('App\Topping');
+        return $this->belongsTo('App\Topping');
     }
 }
