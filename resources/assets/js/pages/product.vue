@@ -3,15 +3,20 @@
         <div v-if="loading">
             <b-alert class="mx-auto" style="width: 100%;" show variant="info">{{ $t('loading') }}...</b-alert>
         </div>
-        <div>
-            <b-img alt="img" center :src="item.image"/>
-            <b-list-group class="mt-1">
-                <b-list-group-item active>{{ $t('bagel.' + item.id + '.title') }}</b-list-group-item>
-                <b-list-group-item>{{ $t('bagel.' + item.id + '.description')}}</b-list-group-item>
-                <b-list-group-item>{{ $t('calories') }}: {{ item.calories }}</b-list-group-item>
-                <b-list-group-item><b-btn size="sm" style="float: right" variant="warning" @click='addToCart(item)'
+        <div class="mx-auto" style="width: 35rem">
+            <b-card no-body
+                :img-src="item.image"
+                img-alt="Image"
+                img-top>
+                <h4 slot="header">{{ $t('bagel.' + item.id + '.title') }}</h4>
+                <b-list-group flush>
+                    <b-list-group-item>{{ $t('bagel.' + item.id + '.description')}}</b-list-group-item>
+                    <b-list-group-item>{{ $t('calories') }}: {{ item.calories }}</b-list-group-item>
+                    <b-list-group-item>{{ $t('price') }}: {{ item.price }}</b-list-group-item>
+                    <b-list-group-item><b-btn size="sm" style="float: right" variant="warning" @click='addToCart(item)'
                                           v-on:click="toast($t('bagel.' + item.id + '.title'))">{{ $t('add') }}</b-btn></b-list-group-item>
-            </b-list-group>
+                </b-list-group>
+    </b-card>
         </div>
     </div>
 </template>
