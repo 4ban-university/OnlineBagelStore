@@ -1,6 +1,6 @@
 <?php
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => 'default.guard'], function () {
     Voyager::routes();
 });
 

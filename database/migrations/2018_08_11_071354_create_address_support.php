@@ -14,20 +14,20 @@ class CreateAddressSupport extends Migration
     public function up()
     {
         Schema::table('orders', function($table) {
-            $table->dropColumn('delivery_address');
-            $table->integer('street_number');
-            $table->string('street_name');
-            $table->string('apartment');
-            $table->string('postcode');
-            $table->string('province');
+            $table->dropColumn('delivery_address')->nullable();
+            $table->integer('street_number')->nullable();
+            $table->string('street_name')->nullable();
+            $table->string('apartment')->nullable();
+            $table->string('postcode')->nullable();
+            $table->string('province')->nullable();
         });
 
         Schema::table('users', function($table) {
-            $table->integer('street_number');
-            $table->string('street_name');
-            $table->string('apartment');
-            $table->string('postcode');
-            $table->string('province');
+            $table->integer('street_number')->nullable();
+            $table->string('street_name')->nullable();
+            $table->string('apartment')->nullable();
+            $table->string('postcode')->nullable();
+            $table->string('province')->nullable();
         });
     }
 
