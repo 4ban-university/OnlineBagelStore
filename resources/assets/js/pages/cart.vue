@@ -36,14 +36,14 @@
                     <td>{{ $t('coupon_info') }}</td>
                     <td>
                         <form @submit.prevent="applyCoupon">
-                            <input v-model="formCoupon" v-validate="'required|alpha_num'" class="form-control" type="text" name="coupon">
-                            <span>
-                                <p>{{ errors.first('coupon') }}</p>
-                            </span>
-                            <span v-if="couponStatus.length">
-                                <p v-for="error in couponStatus">{{ error }}</p>
-                            </span>
-                            <v-button type="success">{{ $t('update') }}</v-button>
+                            <input v-model="form.coupon" v-validate="'required|alpha_num'" class="form-control mb-3" type="text" name="coupon">
+                            <div class="mt-3 mb-3" v-if="couponValid">
+                                <b-alert variant="success" show>{{couponValid}}</b-alert>
+                            </div>
+                            <div class="mt-3 mb-3" v-if="couponInValid">
+                                <b-alert variant="danger" show>{{couponInValid}}</b-alert>
+                            </div>
+                            <v-button :loading="form.busy" type="success">{{ $t('update') }}</v-button>
                         </form>
                     </td>
                 </tr>
@@ -66,7 +66,7 @@
     import Multiselect from 'vue-multiselect'
     import { mapActions, mapGetters } from 'vuex'
     import PlusMinusField from '../components/PlusMinusField.vue'
-
+    import Form from 'vform'
     export default {
         components: {
             'plusminsfield': PlusMinusField,
@@ -76,8 +76,11 @@
             return { title: this.$t('cart') }
         },
         data: () => ({
-            formCoupon: '',
-            couponStatus: [],
+            form: new Form({
+                coupon: ''
+            }),
+            couponValid: null,
+            couponInValid: null,
             value: [
                 { name: 'Javascript', code: 'js' }
             ],
@@ -108,28 +111,31 @@
                 this.updateCurrentToppings()
             },
             async applyCoupon () {
-                let parent = this
-                this.$validator.validateAll().then((result) => {
-                    if (result) {
-                        parent.couponStatus = []
-                        let coupon = parent.formCoupon
-                        axios.get(`/api/coupon/` + coupon)
-                            .then(response => {
-                                if (response.data === 0) {
-                                    // Invalid
-                                    parent.couponStatus.push(parent.$t('coupon_invalid'));
-                                }
-                                else {
-                                    // Valid
-                                    parent.couponStatus.push(parent.$t('coupon_applied_1') + response.data + parent.$t('coupon_applied_2'));
-                                }
-                                parent.applyReduction([response.data, coupon])
-                            })
-                            .catch(() => {
-                                parent.couponStatus.push(parent.$t('network_error'));
-                            })
-                    }
-                })
+                var coupon = this.form.coupon;
+                if(coupon === ''){
+                    // Invalid coupon
+                    this.couponInValid = this.$t('coupon_invalid');
+                    this.couponValid = null;
+                    return;
+                }
+                await axios.get(`/api/coupon/` + coupon)
+                    .then(response => {
+                        if (response.data === 0) {
+                            // Invalid
+                            this.couponInValid = this.$t('coupon_invalid');
+                            this.couponValid = null;
+                        }
+                        else {
+                            // Valid
+                            this.couponValid = this.$t('coupon_applied_1') + response.data + this.$t('coupon_applied_2');
+                            this.couponInValid = null;
+                        }
+                        this.applyReduction([response.data, coupon])
+                    })
+                    .catch(() => {
+                        this.couponInValid = this.$t('network_error');
+                        this.couponValid = null;
+                    })
             },
             updateCurrentToppings() {
                 this.currentToppings = [];
