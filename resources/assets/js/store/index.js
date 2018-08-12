@@ -50,11 +50,7 @@ function getCartProducts(state) {
 
         return {
             id: product.id,
-            name: product.title,
             price: product.price,
-            calories: product.calories,
-            description: product.description,
-            image: product.image,
             type: product.type,
             quantity
         }
@@ -160,12 +156,8 @@ const mutations = {
         for (let i = 0; i < products.length; i++) {
             let product = {
                 id: products[i].id,
-                title: products[i].title,
                 price: products[i].price,
-                calories: products[i].calories,
-                description: products[i].description,
-                type: products[i].type,
-                image: products[i].image
+                type: products[i].type
             }
             state.all.push(product)
         }

@@ -16,7 +16,7 @@
             <tbody>
                 <template v-for="p in products">
                     <tr>
-                        <td>{{ p.name }}</td>
+                        <td>{{ $t('bagel.' + p.id + '.title') }}</td>
                         <td>${{ p.price }}</td>
                         <td><plusminsfield v-bind:value="p.quantity" :product="p"></plusminsfield></td>
                     </tr>
@@ -133,8 +133,8 @@
             },
             updateCurrentToppings() {
                 this.currentToppings = [];
-                for (var i = 0; i < this.products.length; i++) {
-                    var toppings = this.$store.getters.toppings(this.products[i].id)
+                for (let i = 0; i < this.products.length; i++) {
+                    let toppings = this.$store.getters.toppings(this.products[i].id)
                     this.currentToppings.push(
                         {
                             product_id: this.products[i].id,
@@ -149,9 +149,9 @@
             this.formCoupon = this.coupon
             axios.get(`/api/toppings`)
                 .then(response => {
-                    for (var i = 0; i < response.data.data.length; i++) {
-                        var topping = {
-                            name: response.data.data[i].title,
+                    for (let i = 0; i < response.data.data.length; i++) {
+                        let topping = {
+                            name: this.$t('topping.' + response.data.data[i].id + '.title'),
                             code: response.data.data[i].id,
                         }
                         this.toppingsAvailable.push(topping)

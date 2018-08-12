@@ -14,13 +14,13 @@
                   border-variant="secondary">
             <b-card-body>
               <b-link :to="{ name: 'bagel', params: { id: bagel.id }}">
-                <h4 class="card-title">{{ bagel.title }}</h4>
-                <h6 class="card-subtitle">{{ bagel.description }}</h6>
+                <h4 class="card-title">{{ $t('bagel.' + bagel.id + '.title') }}</h4>
+                <h6 class="card-subtitle">{{ $t('bagel.' + bagel.id + '.description') }}</h6>
               </b-link>
             </b-card-body>
             <div slot="footer">
-              <small class="text-muted" align="right">Calories: {{bagel.calories}}</small>
-              <b-btn size="sm" style="float: right" variant="warning" @click='addToCart(bagel)' v-on:click="toast(bagel.title)">{{ $t('add') }}</b-btn>
+              <small class="text-muted" align="right">Calories: {{ bagel.calories }}</small>
+              <b-btn size="sm" style="float: right" variant="warning" @click='addToCart(bagel)' v-on:click="toast($t('bagel.' + bagel.id + '.title'))">{{ $t('add') }}</b-btn>
             </div>
           </b-card>
         </div>
@@ -36,13 +36,13 @@
                   border-variant="secondary">
             <b-card-body>
               <b-link :to="{ name: 'drink', params: { id: drink.id }}">
-                <h4 class="card-title">{{ drink.title }}</h4>
-                <h6 class="card-subtitle">{{ drink.description }}</h6>
+                <h4 class="card-title">{{ $t('bagel.' + drink.id + '.title') }}</h4>
+                <h6 class="card-subtitle">{{ $t('bagel.' + drink.id + '.description') }}</h6>
               </b-link>
             </b-card-body>
             <div slot="footer">
-              <small class="text-muted" align="right">Calories: {{drink.calories}}</small>
-              <b-btn size="sm" style="float: right" variant="warning" @click='addToCart(drink)' v-on:click="toast(drink.title)">{{ $t('add') }}</b-btn>
+              <small class="text-muted" align="right">Calories: {{ drink.calories }}</small>
+              <b-btn size="sm" style="float: right" variant="warning" @click='addToCart(drink)' v-on:click="toast($t('bagel.' + drink.id + '.title'))">{{ $t('add') }}</b-btn>
             </div>
           </b-card>
         </div>

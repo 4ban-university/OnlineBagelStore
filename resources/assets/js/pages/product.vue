@@ -6,11 +6,11 @@
         <div>
             <b-img alt="img" center :src="item.image"/>
             <b-list-group class="mt-1">
-                <b-list-group-item active>{{item.title}}</b-list-group-item>
-                <b-list-group-item>{{item.description}}</b-list-group-item>
-                <b-list-group-item>{{ $t('calories') }}: {{item.calories}}</b-list-group-item>
+                <b-list-group-item active>{{ $t('bagel.' + item.id + '.title') }}</b-list-group-item>
+                <b-list-group-item>{{ $t('bagel.' + item.id + '.description')}}</b-list-group-item>
+                <b-list-group-item>{{ $t('calories') }}: {{ item.calories }}</b-list-group-item>
                 <b-list-group-item><b-btn size="sm" style="float: right" variant="warning" @click='addToCart(item)'
-                                          v-on:click="toast(item.title)">{{ $t('add') }}</b-btn></b-list-group-item>
+                                          v-on:click="toast($t('bagel.' + item.id + '.title'))">{{ $t('add') }}</b-btn></b-list-group-item>
             </b-list-group>
         </div>
     </div>
