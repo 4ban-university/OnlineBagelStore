@@ -13,7 +13,7 @@
                   <p class="text text-left pl-2 pr-2 mb-2">{{ $t('bagel.' + bagel.id + '.description') }}</p>
                   <div class="row no-gutters">
                     <div class="col-6">
-                      <p class="calories mb-2 pl-2">Calories :- {{ bagel.calories }}</p>
+                      <p class="calories mb-2 pl-2">Calories : {{ bagel.calories }}</p>
                     </div>
                     <div class="col-6">
                       <button @click.prevent="addToCart(bagel);toast($t('bagel.' + bagel.id + '.title'));">Add</button>
@@ -34,7 +34,7 @@
                 <p class="text text-left pl-2 pr-2 mb-2">{{ $t('drink.' + drink.id + '.description') }}</p>
                 <div class="row no-gutters">
                   <div class="col-6">
-                    <p class="calories mb-2 pl-2">Calories :- {{ drink.calories }}</p>
+                    <p class="calories mb-2 pl-2">Calories : {{ drink.calories }}</p>
                   </div>
                   <div class="col-6">
                     <button @click='addToCart(drink)' v-on:click="toast($t('bagel.' + drink.id + '.title'))">Add</button>
@@ -48,32 +48,14 @@
       <h3 class="text-left mt-4">{{ $t('our_toppings') }}</h3>
       <div class="row mt-4">
         <div class="col-md-4 mb-4" v-for="topping of toppings" v-bind:key="topping.id">
-          <b-card bg-variant="secondary"
+          <b-card bg-variant="light"
                 :header="$t('topping.' + topping.id + '.title')"
+                :footer="$t('Allergy free :' + setAllergy(topping.allergyfree))"
                 class="text-center">
             <p class="card-text">{{ $t('topping.' + topping.id + '.description') }}</p>
-            <p class="card-text">Calories :- {{ topping.calories }}</p>
-            <p class="card-text">Allergy free :- {{ topping.allergyfree }}</p>
           </b-card>
-          <!-- <div class="items">
-            <router-link :to="{ name: 'topping', params: { id: topping.id }}">
-              <p class="title pl-2">{{ $t('topping.' + topping.id + '.title') }}</p>
-              <div class="description">
-                <p class="text text-left pl-2 pr-2 mb-2">{{ $t('topping.' + topping.id + '.description') }}</p>
-                <div class="row no-gutters">
-                  <div class="col-6">
-                    <p class="calories mb-2 pl-2">Calories :- {{ topping.calories }}</p>
-                  </div>
-                </div>
-              </div>
-            </router-link>
-          </div> -->
         </div>
       </div>
-
-    <!-- // <b-card-group deck
-    //               class="mb-3">
-    // </b-card-group> -->
     </div>
 </template>
 
@@ -116,6 +98,13 @@ export default {
       .then(response => {
         this.toppings = response.data.data;
       })
+  },
+  methods: {
+    setAllergy(id) {
+      if (id == 0)
+        return "No";
+      else return "Yes";
+    }
   }
 }
 </script>
