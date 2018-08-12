@@ -1,10 +1,6 @@
 <template>
   <div>
     <div class="text-center">
-      <div class="title mb-4">
-        {{ title }}
-      </div>
-
       <Menu/>
     </div>
   </div>
@@ -35,9 +31,5 @@ export default {
   position: absolute;
   right: 10px;
   top: 18px;
-}
-
-.title {
-  font-size: 85px;
 }
 </style>
