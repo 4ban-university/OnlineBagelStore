@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
-use App\Http\Resources\LocaleText as LocaleTextResource;
 use App\ProductText;
 
 
@@ -17,6 +16,10 @@ class LocaleTextController extends Controller
     public function index($locale)
     {
         $productTexts = ProductText::where('locale', $locale)->get();
-        return LocaleTextResource::collection($productTexts);
+        $return = [];
+        foreach($productTexts as $productText) {
+            $return[$productText->product_type . "." . $productText->product_id . "." . $productText->type] = $productText->text;
+        }
+        return response()->json($return);
     }
 }
