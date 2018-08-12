@@ -111,11 +111,11 @@
                         let order = {
                             customer: parent.details.name,
                             price: parent.price,
-                            street_number: parent.details.number,
-                            street_name: parent.details.street,
+                            street_number: parent.details.street_number,
+                            street_name: parent.details.street_name,
                             apartment: parent.details.apartment,
                             phone: parent.details.phone,
-                            postcode: parent.details.postal_code,
+                            postcode: parent.details.postcode,
                             isPickup: parent.details.isPickup,
                             province: parent.details.province,
                             items: []

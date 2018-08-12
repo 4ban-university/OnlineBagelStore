@@ -17,7 +17,7 @@ import Menu from "../components/Menu";
 export default {
     components: {Menu},
     metaInfo () {
-    return { title: this.$t('home') }
+    return { title: this.$t('welcome') }
   },
 
   data: () => ({

@@ -52,7 +52,7 @@
   "apartment": "Apartment",
   "number": "Number",
   "city": "City",
-  "postal_code": "Postal Code",
+  "postcode": "Postal Code",
   "province": "Province",
   "go_shopping": "Go shopping",
   "empty_cart": "Your cart is empty!",

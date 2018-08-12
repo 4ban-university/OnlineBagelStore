@@ -16,7 +16,7 @@
           </div>
         </div>
 
-        <!-- Name -->
+        <!-- Last Name -->
         <div class="form-group row">
           <label class="col-md-3 col-form-label text-md-right">{{ $t('lastname') }}</label>
           <div class="col-md-7">
@@ -58,8 +58,8 @@
         <div class="form-group row" v-if="!form.isPickup">
           <label class="col-md-3 col-form-label text-md-right">{{ $t('number') }}</label>
           <div class="col-md-7">
-            <input v-model="form.number" class="form-control"  v-validate="'required|numeric'" type="text" name="number" :data-vv-as="$t('number')">
-            <span>{{ errors.first('number') }}</span>
+            <input v-model="form.street_number" class="form-control"  v-validate="'required|numeric'" type="text" name="street_number" :data-vv-as="$t('number')">
+            <span>{{ errors.first('street_number') }}</span>
           </div>
         </div>
 
@@ -67,8 +67,8 @@
         <div class="form-group row" v-if="!form.isPickup">
           <label class="col-md-3 col-form-label text-md-right">{{ $t('street') }}</label>
           <div class="col-md-7">
-            <input v-model="form.street" class="form-control" v-validate="'required|alpha_spaces'" type="text" name="street" :data-vv-as="$t('street')">
-            <span>{{ errors.first('street') }}</span>
+            <input v-model="form.street_name" class="form-control" v-validate="'required|alpha_spaces'" type="text" name="street_name" :data-vv-as="$t('street')">
+            <span>{{ errors.first('street_name') }}</span>
           </div>
         </div>
 
@@ -83,12 +83,12 @@
 
         <!-- Postal code -->
         <div class="form-group row" v-if="!form.isPickup">
-          <label class="col-md-3 col-form-label text-md-right">{{ $t('postal_code') }}</label>
+          <label class="col-md-3 col-form-label text-md-right">{{ $t('postcode') }}</label>
           <div class="col-md-7">
-            <input type="text" name="postal_code" v-model="form.postal_code"
+            <input type="text" name="postcode" v-model="form.postcode"
                    v-validate="{ required: true, regex: /^[ABCEGHJKLMNPRSTVXY][0-9][ABCEGHJKLMNPRSTVWXYZ] ?[0-9][ABCEGHJKLMNPRSTVWXYZ][0-9]$/i }"
-                   class="form-control" :data-vv-as="$t('postal_code')">
-            <span>{{ errors.first('postal_code') }}</span>
+                   class="form-control" :data-vv-as="$t('postcode')">
+            <span>{{ errors.first('postcode') }}</span>
           </div>
         </div>
 
@@ -139,11 +139,11 @@
                 lastname: '',
                 phone: '+1',
                 isPickup: true,
-                postal_code: '',
-                street: '',
+                postcode: '',
+                street_name: '',
+                street_number: '',
                 city: 'Montreal',
                 province: 'QC',
-                number: '',
                 apartment: '',
                 email: ''
             }

@@ -34,10 +34,10 @@ const state = {
         email: '',
         phone: '+1',
         isPickup: true,
-        street: '',
-        postal_code: '',
+        street_name: '',
+        postcode: '',
         city: 'Montreal',
-        number: '',
+        street_number: '',
         apartment: '',
         province: 'QC'
     },

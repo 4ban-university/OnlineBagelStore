@@ -51,7 +51,7 @@
   "apartment": "Appartement",
   "number": "Numéro",
   "city": "Ville",
-  "postal_code": "Code Postal",
+  "postcode": "Code Postal",
   "province": "Province",
   "go_shopping": "Allez magasiner",
   "empty_cart": "Votre panier est vide!",
