@@ -45,6 +45,18 @@
           </div>
         </div>
       </div>
+      <h3 class="text-left mt-4">{{ $t('our_toppings') }}</h3>
+      <div class="row mt-4">
+        <div class="col-md-4 mb-4" v-for="topping of toppings" v-bind:key="topping.id">
+          <b-card bg-variant="light"
+                :header="$t('topping.' + topping.id + '.title')"
+                :footer="$t('Allergy free :' + setAllergy(topping.allergyfree))"
+                class="text-center">
+            <p class="card-text">{{ $t('topping.' + topping.id + '.description') }}</p>
+            <p class="calories mb-2 pl-2">{{ $t('calories')}}: {{ topping.calories }}</p>
+          </b-card>
+        </div>
+      </div>
     </div>
 </template>
 
@@ -64,13 +76,19 @@ export default {
     ]),
     toast: function(title) {
       this.$toasted.show(`${title} ${this.$t('add_to_cart')}`);
-    }
+    },
+    setAllergy(id) {
+       if (id == 0)
+         return "No";
+       else return "Yes";
+     }
   },
   data () {
     return {
       products: [],
       bagels: [],
       drinks: [],
+      toppings: [],
       loading: ''
     }
   },
@@ -79,10 +97,21 @@ export default {
       .then(response => {
         this.products = response.data.data;
         this.bagels = this.products.filter(b => b.type === 1)
-        this.drinks = this.products.filter(b => b.type !== 1)
+        this.drinks = this.products.filter(b => b.type !== 1) 
         this.updateProducts(response.data.data);
       })
+    axios.get(`/api/toppings`)
+      .then(response => {
+        this.toppings = response.data.data;
+      })
   }
+  // methods: {
+  //   setAllergy(id) {
+  //     if (id == 0)
+  //       return "No";
+  //     else return "Yes";
+  //   }
+  // }
 }
 </script>
 
