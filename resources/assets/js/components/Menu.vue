@@ -10,7 +10,6 @@
               <router-link :to="{ name: 'bagel', params: { id: bagel.id }}">
                 <p class="title pl-2">{{ $t('bagel.' + bagel.id + '.title') }}</p>
                 <div class="description">
-                  <p class="text text-left pl-2 pr-2 mb-2">{{ $t('bagel.' + bagel.id + '.description') }}</p>
                   <div class="row no-gutters">
                     <div class="col-6">
                       <p class="calories mb-2 pl-2">${{ bagel.price }}</p>
@@ -31,7 +30,6 @@
             <router-link :to="{ name: 'drink', params: { id: drink.id }}">
               <p class="title pl-2">{{ $t('bagel.' + drink.id + '.title') }}</p>
               <div class="description">
-                <p class="text text-left pl-2 pr-2 mb-2">{{ $t('bagel.' + drink.id + '.description') }}</p>
                 <div class="row no-gutters">
                   <div class="col-6">
                     <p class="calories mb-2 pl-2">${{ drink.price }}</p>
@@ -52,7 +50,6 @@
                 :header="$t('topping.' + topping.id + '.title')"
                 :footer="$t('allergy_free') + ': ' + ((topping.allergyfree) ? $t('yes') : $t('no'))"
                 class="text-center">
-            <p class="card-text">{{ $t('topping.' + topping.id + '.description') }}</p>
             <p class="calories mb-2 pl-2">{{ $t('calories')}}: {{ topping.calories }}</p>
           </b-card>
         </div>
