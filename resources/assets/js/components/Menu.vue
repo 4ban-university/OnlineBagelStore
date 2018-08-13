@@ -29,9 +29,9 @@
         <div class="col-md-4 mb-4" v-for="drink of drinks" v-bind:key="drink.id">
           <div class="items" v-bind:style="{ 'background-image': 'url(' + (drink.image ||'https://canadatwoway.com/wp-content/uploads/2017/11/No_Image_Available.jpg') + ')' }">
             <router-link :to="{ name: 'drink', params: { id: drink.id }}">
-              <p class="title pl-2">{{ $t('drink.' + drink.id + '.title') }}</p>
+              <p class="title pl-2">{{ $t('bagel.' + drink.id + '.title') }}</p>
               <div class="description">
-                <p class="text text-left pl-2 pr-2 mb-2">{{ $t('drink.' + drink.id + '.description') }}</p>
+                <p class="text text-left pl-2 pr-2 mb-2">{{ $t('bagel.' + drink.id + '.description') }}</p>
                 <div class="row no-gutters">
                   <div class="col-6">
                     <p class="calories mb-2 pl-2">${{ drink.price }}</p>
@@ -50,7 +50,7 @@
         <div class="col-md-4 mb-4" v-for="topping of toppings" v-bind:key="topping.id">
           <b-card bg-variant="light"
                 :header="$t('topping.' + topping.id + '.title')"
-                :footer="$t('Allergy free :' + setAllergy(topping.allergyfree))"
+                :footer="$t('allergy_free') + ': ' + ((topping.allergyfree) ? $t('yes') : $t('no'))"
                 class="text-center">
             <p class="card-text">{{ $t('topping.' + topping.id + '.description') }}</p>
             <p class="calories mb-2 pl-2">{{ $t('calories')}}: {{ topping.calories }}</p>
@@ -76,12 +76,7 @@ export default {
     ]),
     toast: function(title) {
       this.$toasted.show(`${title} ${this.$t('add_to_cart')}`);
-    },
-    setAllergy(id) {
-       if (id == 0)
-         return "No";
-       else return "Yes";
-     }
+    }
   },
   data () {
     return {
@@ -105,13 +100,6 @@ export default {
         this.toppings = response.data.data;
       })
   }
-  // methods: {
-  //   setAllergy(id) {
-  //     if (id == 0)
-  //       return "No";
-  //     else return "Yes";
-  //   }
-  // }
 }
 </script>
 

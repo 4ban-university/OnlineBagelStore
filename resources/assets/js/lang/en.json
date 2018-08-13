@@ -1,10 +1,13 @@
 {
   "ok": "Ok",
+  "yes": "Yes",
+  "no": "No",
   "cancel": "Cancel",
   "error_alert_title": "Oops...",
   "loading": "Loading...",
   "our_bagels": "Our Bagels",
   "our_toppings": "Our Toppings",
+  "allergy_free": "Allergy Free",
   "fancy_drink": "Fancy a Drink?",
   "error_alert_text": "Something went wrong! Please try again.",
   "token_expired_alert_title": "Session Expired!",

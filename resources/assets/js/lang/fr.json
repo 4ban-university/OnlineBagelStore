@@ -1,9 +1,13 @@
 {
   "ok": "Ok",
+  "yes": "Oui",
+  "no": "Non",
   "cancel": "Annuler",
   "error_alert_title": "Oups...",
   "loading": "Loading...",
   "our_bagels": "Nos bagels",
+  "our_toppings": "Nos garnitures",
+  "allergy_free": "Sans allergie",
   "your_order": "Votre commande",
   "bagels": "Bagels",
   "order_id": "Numéro de la commande",
