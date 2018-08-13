@@ -46,7 +46,7 @@
                             <div class="mt-3 mb-3" v-if="couponInValid">
                                 <b-alert variant="danger" show>{{couponInValid}}</b-alert>
                             </div>
-                            <v-button type="success">{{ $t('update') }}</v-button>
+                            <v-button variant="primary">{{ $t('update') }}</v-button>
                         </form>
                     </td>
                 </tr>
@@ -59,7 +59,7 @@
 
         </table>
         <p>
-            <router-link v-show="products.length" :to="{ name: 'details' }" tag="button" class="btn btn-success">{{ $t('order_info') }}</router-link>
+            <b-button v-show="products.length" :to="{ name: 'details' }" variant="primary">{{ $t('order_info') }}</b-button>
         </p>
     </div>
 </template>

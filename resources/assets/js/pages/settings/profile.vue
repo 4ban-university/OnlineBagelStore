@@ -99,7 +99,7 @@
       <!-- Submit Button -->
       <div class="form-group row">
         <div class="col-md-9 ml-md-auto">
-          <b-button v-on:click="update" type="success">{{ $t('update') }}</b-button>
+          <b-button v-on:click="update" variant="primary">{{ $t('update') }}</b-button>
         </div>
       </div>
     </form>

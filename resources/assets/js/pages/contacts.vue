@@ -3,7 +3,10 @@
         <div class="text-center">
             <div class="title mb-4">
                 {{ title }}
+            </div>
+            <div>
                 <h1 class="mt-5">{{ $t('contact_us') }}</h1>
+                <p>{{ $t('contact_us_email') }} <a href="mailto:ieat@poupa.fr">ieat@poupa.fr</a></p>
             </div>
         </div>
     </div>

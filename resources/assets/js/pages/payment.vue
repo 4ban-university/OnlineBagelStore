@@ -62,7 +62,7 @@
         <!-- Submit Button -->
         <div class="form-group row">
           <div class="col-md-9 ml-md-auto">
-            <b-button v-on:click="sendOrder" type="success">{{ $t('submit') }}</b-button>
+            <b-button v-on:click="sendOrder" variant="primary">{{ $t('submit') }}</b-button>
           </div>
         </div>
     </card>

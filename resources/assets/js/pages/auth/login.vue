@@ -41,9 +41,6 @@
               <v-button :loading="form.busy">
                 {{ $t('login') }}
               </v-button>
-
-              <!-- GitHub Login Button -->
-              <login-with-github/>
             </div>
           </div>
         </form>
