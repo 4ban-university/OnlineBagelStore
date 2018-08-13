@@ -10,7 +10,7 @@
         <div class="form-group row">
           <label class="col-md-3 col-form-label text-md-right">{{ $t('name') }}</label>
           <div class="col-md-7">
-            <input v-model="form.name" class="form-control" v-validate="'required|alpha'" type="text" name="name" :data-vv-as="$t('name')">
+            <input v-model="form.name" class="form-control" v-validate="'required|alpha_spaces'" type="text" name="name" :data-vv-as="$t('name')">
             <span>{{ errors.first('name') }}</span>
           </div>
         </div>
