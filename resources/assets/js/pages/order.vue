@@ -30,11 +30,11 @@
                     <b-col>{{ $t('bagels') }}</b-col>
                     <b-col>
                         <div v-for="item of this.order.items" v-bind:key="item.id">
-                            {{ item.amount }}x {{ item.product.title }}
+                            {{ item.amount }}x {{ $t('bagel.' + item.product.id + '.title') }}
                             <div v-if="item.toppings.length">
                                 {{ $t('topping') }}:
                                 <template v-for="(element, index) in item.toppings">
-                                    <span>{{element.topping.title}}</span><span v-if="index + 1 < item.toppings">, </span>
+                                    <span>{{ $t('topping.' + element.id + '.title') }}</span><span v-if="index + 1 < item.toppings">, </span>
                                 </template>
                             </div>
                         </div>
