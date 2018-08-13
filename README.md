@@ -54,6 +54,11 @@ JavaScript part
 # install javascript dependencies
 npm install
 
+OR
+
+# In case npm is not working in Windows
+yarn install
+
 # build application
 npm run dev
 ```
